@@ -3,7 +3,7 @@ import { ScrollView, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import { BASE_URL } from './config';
+import { get } from './api';
 import { StackParamList } from './routes';
 import { PodList, Pod } from './types';
 import PodStatus from './PodStatus';
@@ -13,42 +13,18 @@ type PodListScreenProps = {
 }
 
 export default function PodListScreen({ navigation }: PodListScreenProps) {
-  const url = BASE_URL + 'v1/namespaces/default/pods';
-
   const [pods, setPods] = useState<PodList>();
   const [error, setError] = useState<Error>();
 
   useEffect(() => {
-    fetch(url).then((result) => result.json()).then(setPods, setError);
+    get<PodList>('v1/namespaces/default/pods').then(setPods, setError);
   }, []);
-
-  /*
-  useEffect(() => {
-    const ws = new WebSocket('ws://host.com/path');
-    ws.onopen = () => {
-      // connection opened
-      ws.send('something'); // send a message
-    };
-    ws.onmessage = e => {
-      // a message was received
-      console.log(e.data);
-    };
-    ws.onerror = e => {
-      // an error occurred
-      console.log(e.message);
-    };
-    ws.onclose = e => {
-      // connection closed
-      console.log(e.code, e.reason);
-    };
-  }, []);
-  */
 
   console.log('pods', pods);
 
   return (
     <ScrollView>
-      {error ? <Text>JSON.stringify(error)</Text> : null}
+      {error ? <Text>{JSON.stringify(error, null, 2)}</Text> : null}
       {pods ? pods.items.map((pod, key) => <PodView {...{key, pod, navigation}} />) : null}
     </ScrollView>
   );

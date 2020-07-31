@@ -3,7 +3,7 @@ import { ScrollView, Text, View } from 'react-native';
 import { TouchableOpacity, Switch } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import { BASE_URL } from './config';
+import { get } from './api';
 import { StackParamList } from './routes';
 import { NamespaceList, Namespace } from './types';
 import NamespaceStatus from './NamespaceStatus';
@@ -14,14 +14,12 @@ type NamespaceListScreenProps = {
 }
 
 export default function NamespaceListScreen({ navigation }: NamespaceListScreenProps) {
-  const url = BASE_URL + 'v1/namespaces';
-
   const [showSystemNamespaces, setShowSystemNamespaces] = useState(false);
   const [namespaces, setNamespaces] = useState<NamespaceList>();
   const [error, setError] = useState<Error>();
 
   useEffect(() => {
-    fetch(url).then((result) => result.json()).then(setNamespaces, setError);
+    get<NamespaceList>('v1/namespaces').then(setNamespaces, setError);
   }, []);
 
   console.log('namespaces', namespaces);
@@ -37,7 +35,7 @@ export default function NamespaceListScreen({ navigation }: NamespaceListScreenP
         <Switch value={showSystemNamespaces} onValueChange={setShowSystemNamespaces} />
         <Text style={{ paddingLeft: 8 }}>Show system namespaces</Text>
       </View>
-      {error ? <Text>JSON.stringify(error)</Text> : null}
+      {error ? <Text>{JSON.stringify(error, null, 2)}</Text> : null}
       {filteredNamespaces.map((namespace, key) => <NamespaceView {...{key, namespace, navigation}} />)}
     </ScrollView>
   );
