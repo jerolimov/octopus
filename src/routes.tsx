@@ -1,4 +1,4 @@
-import { Pod } from "./types";
+import { Pod, Namespace } from "./types";
 
 export type StackParamList = {
   Home: any,
@@ -6,4 +6,6 @@ export type StackParamList = {
   OCLogin: any,
   Pods: any,
   Pod: { pod: Pod },
+  Namespaces: any,
+  Namespace: { namespace: Namespace },
 }

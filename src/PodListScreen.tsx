@@ -22,6 +22,30 @@ export default function PodListScreen({ navigation }: PodListScreenProps) {
     fetch(url).then((result) => result.json()).then(setPods, setError);
   }, []);
 
+  /*
+  useEffect(() => {
+    const ws = new WebSocket('ws://host.com/path');
+    ws.onopen = () => {
+      // connection opened
+      ws.send('something'); // send a message
+    };
+    ws.onmessage = e => {
+      // a message was received
+      console.log(e.data);
+    };
+    ws.onerror = e => {
+      // an error occurred
+      console.log(e.message);
+    };
+    ws.onclose = e => {
+      // connection closed
+      console.log(e.code, e.reason);
+    };
+  }, []);
+  */
+
+  console.log('pods', pods);
+
   return (
     <ScrollView>
       {error ? <Text>JSON.stringify(error)</Text> : null}

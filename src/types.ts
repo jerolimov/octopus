@@ -3,6 +3,7 @@ type ApiVersion = string;
 type Kind = string;
 type JSONString = string;
 type DateTimeString = string;
+type Labels = Record<string, string>
 
 export interface OwnerReferences {
   apiVersion: ApiVersion;
@@ -21,7 +22,7 @@ export interface Metadata {
   uid: string;
   resourceVersion: string | number;
   creationTimestamp: DateTimeString;
-  labels: Record<string, string>;
+  labels: Labels;
   ownerReferences: OwnerReferences;
   managedFields: {
     manager: string;
@@ -118,4 +119,26 @@ export interface PodList {
   kind: 'PodList',
   metadata: Record<string, string>,
   items: Pod[],
+}
+
+export interface NamespaceList {
+  kind: 'NamespaceList',
+  apiVersion: 'v1',
+  metadata: {
+    selfLink: string;
+    resourceVersion: string | number;
+  };
+  items: Namespace[];
+}
+
+export type NamespaceStatusPhase = 'Active' | 'Unknown';
+
+export interface Namespace {
+  metadata: Metadata;
+  spec: {
+    finalizers: string[];
+  };
+  status: {
+    phase: NamespaceStatusPhase;
+  };
 }

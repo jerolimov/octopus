@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Text, View } from 'react-native';
+import { ScrollView, Text } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 import { StackParamList } from './routes';
@@ -10,11 +11,19 @@ type HomeScreenProps = {
 
 export default function HomeScreen({ navigation }: HomeScreenProps) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        title="Pods"
+    <ScrollView style={{ backgroundColor: 'white' }}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Namespaces')}
+        style={{ backgroundColor: 'white', padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
+      >
+        <Text>Namespaces</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
         onPress={() => navigation.navigate('Pods')}
-      />
-    </View>
+        style={{ backgroundColor: 'white', padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
+      >
+        <Text>Pods</Text>
+      </TouchableOpacity>
+    </ScrollView>
   );
 }
