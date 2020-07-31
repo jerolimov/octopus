@@ -4,7 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeScreen from './src/HomeScreen';
-import DetailsScreen from './src/DetailsScreen';
+import PodListScreen from './src/PodListScreen';
+import PodScreen from './src/PodScreen';
 
 import { StackParamList } from './src/routes';
 
@@ -15,7 +16,8 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen name="Pods" component={PodListScreen} />
+        <Stack.Screen name="Pod" component={PodScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
