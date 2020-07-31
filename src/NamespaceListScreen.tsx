@@ -19,7 +19,7 @@ export default function NamespaceListScreen({ navigation }: NamespaceListScreenP
   const [error, setError] = useState<Error>();
 
   useEffect(() => {
-    get<NamespaceList>('v1/namespaces').then(setNamespaces, setError);
+    get<NamespaceList>('api/v1/namespaces').then(setNamespaces, setError);
   }, []);
 
   console.log('namespaces', namespaces);

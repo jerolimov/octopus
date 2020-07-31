@@ -19,6 +19,12 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
         <Text>Namespaces</Text>
       </TouchableOpacity>
       <TouchableOpacity
+        onPress={() => navigation.navigate('Deployments')}
+        style={{ backgroundColor: 'white', padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
+      >
+        <Text>Deployments</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
         onPress={() => navigation.navigate('Pods')}
         style={{ backgroundColor: 'white', padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
       >

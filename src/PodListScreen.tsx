@@ -17,7 +17,7 @@ export default function PodListScreen({ navigation }: PodListScreenProps) {
   const [error, setError] = useState<Error>();
 
   useEffect(() => {
-    get<PodList>('v1/namespaces/default/pods').then(setPods, setError);
+    get<PodList>('api/v1/namespaces/default/pods').then(setPods, setError);
   }, []);
 
   console.log('pods', pods);

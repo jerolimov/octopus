@@ -3,7 +3,9 @@ type ApiVersion = string;
 type Kind = string;
 type JSONString = string;
 type DateTimeString = string;
-type Labels = Record<string, string>
+type Labels = Record<string, string>;
+type Annotations = Record<string, string>;
+type BooleanString = 'True' | 'False';
 
 export interface OwnerReferences {
   apiVersion: ApiVersion;
@@ -23,6 +25,7 @@ export interface Metadata {
   resourceVersion: string | number;
   creationTimestamp: DateTimeString;
   labels: Labels;
+  annotations: Annotations;
   ownerReferences: OwnerReferences;
   managedFields: {
     manager: string;
@@ -80,28 +83,8 @@ export interface ContainerStatus {
 export type PodStatusPhase = 'Pending' | 'Running' | 'Succeeded' | 'Failed' | 'Unknown';
 
 export interface Pod {
-  metadata: Metadata,
-  spec: {
-    volumes: {
-      name: string;
-      secret: {
-        secretName: string;
-        defaultMode: number;
-      }
-    }[],
-    containers: Container[],
-    restartPolicy: 'Always';
-    terminationGracePeriodSeconds: number;
-    dnsPolicy: string;
-    serviceAccountName: string;
-    serviceAccount: string;
-    nodeName: string;
-    securityContext: {};
-    schedulerName: string;
-    tolerations: Toleration[];
-    priority: number;
-    enableServiceLinks: boolean;
-  };
+  metadata: Metadata;
+  spec: PodSpec;
   status: {
     phase: PodStatusPhase;
     conditions: Condition[];
@@ -114,16 +97,38 @@ export interface Pod {
   }
 }
 
+export interface PodSpec {
+  volumes: {
+    name: string;
+    secret: {
+      secretName: string;
+      defaultMode: number;
+    }
+  }[];
+  containers: Container[];
+  restartPolicy: 'Always';
+  terminationGracePeriodSeconds: number;
+  dnsPolicy: string;
+  serviceAccountName: string;
+  serviceAccount: string;
+  nodeName: string;
+  securityContext: {};
+  schedulerName: string;
+  tolerations: Toleration[];
+  priority: number;
+  enableServiceLinks: boolean;
+}
+
 export interface PodList {
-  apiVersion: 'v1',
-  kind: 'PodList',
-  metadata: Record<string, string>,
-  items: Pod[],
+  apiVersion: 'v1';
+  kind: 'PodList';
+  metadata: Record<string, string>;
+  items: Pod[];
 }
 
 export interface NamespaceList {
-  kind: 'NamespaceList',
-  apiVersion: 'v1',
+  kind: 'NamespaceList';
+  apiVersion: 'v1';
   metadata: {
     selfLink: string;
     resourceVersion: string | number;
@@ -142,3 +147,55 @@ export interface Namespace {
     phase: NamespaceStatusPhase;
   };
 }
+
+export interface DeploymentList {
+  kind: 'DeploymentList';
+  apiVersion: 'apps/v1';
+  metadata: {
+    selfLink: string;
+    resourceVersion: string | number;
+  };
+  items: Deployment[];
+}
+
+export interface Deployment {
+  metadata: Metadata & {
+    generation: number;
+  };
+  spec: {
+    replicas: number;
+    selector: {
+      matchLabels: Labels;
+    };
+    template: {
+      metadata: Metadata;
+      spec: PodSpec;
+    };
+    strategy: {
+      type: 'RollingUpdate';
+      rollingUpdate: {
+        maxUnavailable: string;
+        maxSurge: string;
+      };
+    };
+    revisionHistoryLimit: number;
+    progressDeadlineSeconds: number;
+  };
+  status: {
+    observedGeneration: number;
+    replicas: number;
+    updatedReplicas: number;
+    readyReplicas: number;
+    availableReplicas: number;
+    conditions: {
+      type: DeploymentStatusConditionType;
+      status: BooleanString;
+      lastUpdateTime: DateTimeString;
+      lastTransitionTime: DateTimeString;
+      reason: string;
+      message: string;
+    }[];
+  };
+}
+
+type DeploymentStatusConditionType = 'Available' | 'Progressing';

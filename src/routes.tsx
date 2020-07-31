@@ -1,4 +1,4 @@
-import { Pod, Namespace } from "./types";
+import { Pod, Namespace, Deployment } from "./types";
 
 export type StackParamList = {
   Home: any,
@@ -8,4 +8,6 @@ export type StackParamList = {
   Pod: { pod: Pod },
   Namespaces: any,
   Namespace: { namespace: Namespace },
+  Deployments: any,
+  Deployment: { deployment: Deployment },
 }
