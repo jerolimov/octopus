@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ScrollView, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -6,7 +6,9 @@ import { DefaultTheme } from '@react-navigation/native';
 import { HeaderButtons, HeaderButton, Item, HiddenItem, OverflowMenu } from 'react-navigation-header-buttons';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 
+import { watch } from './api';
 import { StackParamList } from './routes';
+import { Pod } from './types';
 
 type HomeScreenProps = {
   navigation: StackNavigationProp<StackParamList, 'Home'>,
@@ -18,6 +20,12 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
       headerRight: () => <HomeScreenHeaderRight {...{navigation}} />,
     });
   }, [navigation]);
+
+  useEffect(() => {
+    return watch<Pod>('api/v1/namespaces/default/pods?watch=true', (type, pod) => {
+      console.warn('onMessage', type, pod.status.phase, pod.metadata.name);
+    });
+  }, []);
 
   return (
     <ScrollView style={{ backgroundColor: 'white' }}>

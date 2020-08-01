@@ -48,3 +48,27 @@ export function deleteIt<T>(path: string): Promise<T> {
     throw error;
   });
 }
+
+export function watch<T = any>(path: string, onMessage: (data: string, object: T) => void): () => void {
+  const ws = new WebSocket(BASE_URL + path);
+  ws.onopen = () => {
+    console.log('onopen');
+    // ws.send('something');
+  };
+  ws.onmessage = (event: WebSocketMessageEvent) => {
+    if (event.data) {
+      const data = JSON.parse(event.data);
+      console.log('onmessage data', data.type, data.object.metadata.name);
+      onMessage(data.type, data.object);
+    }
+  };
+  ws.onerror = (event: WebSocketErrorEvent | any) => {
+    console.warn('onerror', event);
+  };
+  ws.onclose = (event: WebSocketCloseEvent) => {
+    console.log('onclose', event);
+  };
+  return () => {
+    ws.close();
+  }
+}
