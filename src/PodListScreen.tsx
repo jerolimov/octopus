@@ -21,8 +21,6 @@ export default function PodListScreen({ navigation }: PodListScreenProps) {
     get<PodList>('api/v1/namespaces/default/pods').then(setPods, setError);
   }, []);
 
-  console.log('pods', pods);
-
   return (
     <ScrollView>
       <Container>

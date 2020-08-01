@@ -34,8 +34,6 @@ export default function ReplicaSetScreen({ route, navigation }: ReplicaSetScreen
     get<PodList>('api/v1/namespaces/default/pods' + query).then(setPods, setError);
   }, []);
 
-  console.log('pods', pods);
-
   return (
     <ScrollView>
       <Container style={{ padding: 15 }}>

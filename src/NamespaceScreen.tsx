@@ -32,8 +32,6 @@ export default function NamespaceScreen({ route, navigation }: NamespaceScreenPr
     get<PodList>(`api/v1/namespaces/${namespaceName}/pods`).then(setPods, setError);
   }, []);
 
-  console.log('pods', pods);
-
   return (
     <ScrollView>
       <Container style={{ padding: 15 }}>

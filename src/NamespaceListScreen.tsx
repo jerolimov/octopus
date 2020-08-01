@@ -23,8 +23,6 @@ export default function NamespaceListScreen({ navigation }: NamespaceListScreenP
     get<NamespaceList>('api/v1/namespaces').then(setNamespaces, setError);
   }, []);
 
-  console.log('namespaces', namespaces);
-
   const allNamespaces = namespaces?.items || [];
   const filteredNamespaces = showSystemNamespaces ?
     allNamespaces :

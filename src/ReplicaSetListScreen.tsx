@@ -20,8 +20,6 @@ export default function ReplicaSetListScreen({ navigation }: ReplicaSetListScree
     get<ReplicaSetList>('apis/apps/v1/namespaces/default/replicasets').then(setReplicaSets, setError);
   }, []);
 
-  console.log('replicaSets', replicaSets);
-
   return (
     <ScrollView>
       <Container>
