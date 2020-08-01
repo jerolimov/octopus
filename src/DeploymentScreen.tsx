@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, Text, View } from 'react-native';
+import { DefaultTheme } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { HeaderButtons, HeaderButton, Item, HiddenItem, OverflowMenu } from 'react-navigation-header-buttons';
+import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 
-import { get } from './api';
+import { get, deleteIt } from './api';
 import { StackParamList } from './routes';
 import { Deployment, PodList } from './types';
 
@@ -18,6 +21,7 @@ export default function DeploymentScreen({ route, navigation }: DeploymentScreen
     navigation.setOptions({
       title: deployment.metadata.name,
       headerBackTitleVisible: false,
+      headerRight: () => <DeploymentScreenHeaderRight {...{route, navigation}} />,
     });
   }, [navigation]);
 
@@ -65,4 +69,28 @@ export default function DeploymentScreen({ route, navigation }: DeploymentScreen
       </View>
     </ScrollView>
   );
+}
+
+function DeploymentScreenHeaderRight({ route, navigation }: DeploymentScreenProps) {
+  const tintColor = DefaultTheme.colors.primary;
+
+  const deployment = route.params.deployment;
+
+  const onDeletePressed = () => {
+    deleteIt(deployment.metadata.selfLink).then((response) => {
+      console.warn('Delete successful!', response);
+    }, (error) => {
+      console.warn('Delete failed!', error);
+    });
+  };
+
+  return (
+    <HeaderButtons>
+      <OverflowMenu
+        OverflowIcon={<Ionicons name="ios-more" size={24} color={tintColor} />}
+      >
+        <HiddenItem title="Delete" destructive onPress={onDeletePressed} />
+      </OverflowMenu>
+    </HeaderButtons>
+  )
 }
