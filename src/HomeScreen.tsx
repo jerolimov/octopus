@@ -2,6 +2,9 @@ import React from 'react';
 import { ScrollView, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { DefaultTheme } from '@react-navigation/native';
+import { HeaderButtons, HeaderButton, Item, HiddenItem, OverflowMenu } from 'react-navigation-header-buttons';
+import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 
 import { StackParamList } from './routes';
 
@@ -10,6 +13,12 @@ type HomeScreenProps = {
 }
 
 export default function HomeScreen({ navigation }: HomeScreenProps) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => <HomeScreenHeaderRight {...{navigation}} />,
+    });
+  }, [navigation]);
+
   return (
     <ScrollView style={{ backgroundColor: 'white' }}>
       <TouchableOpacity
@@ -32,4 +41,18 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
       </TouchableOpacity>
     </ScrollView>
   );
+}
+
+function HomeScreenHeaderRight({ navigation }: HomeScreenProps) {
+  const tintColor = DefaultTheme.colors.primary;
+
+  return (
+    <HeaderButtons>
+      <OverflowMenu
+        OverflowIcon={<Ionicons name="ios-more" size={24} color={tintColor} />}
+      >
+        <HiddenItem title="Create Deployment" onPress={() => navigation.push('CreateDeployment')} />
+      </OverflowMenu>
+    </HeaderButtons>
+  )
 }

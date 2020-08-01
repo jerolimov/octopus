@@ -24,8 +24,8 @@ export interface Metadata {
   uid: string;
   resourceVersion: string | number;
   creationTimestamp: DateTimeString;
-  labels: Labels;
-  annotations: Annotations;
+  labels?: Labels;
+  annotations?: Annotations;
   ownerReferences: OwnerReferences;
   managedFields: {
     manager: string;
@@ -159,6 +159,8 @@ export interface DeploymentList {
 }
 
 export interface Deployment {
+  kind: 'Deployment';
+  apiVersion: 'apps/v1';
   metadata: Metadata & {
     generation: number;
   };

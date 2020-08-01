@@ -52,8 +52,8 @@ export default function PodScreen({ route, navigation }: PodScreenProps) {
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Labels</Text>
         <View style={{ padding: 15 }}>
-          {Object.keys(pod.metadata.labels).map((labelName) => (
-            <Text key={labelName}>{labelName}={pod.metadata.labels[labelName]}</Text>
+          {Object.keys(pod.metadata.labels || {}).map((labelName) => (
+            <Text key={labelName}>{labelName}={pod.metadata.labels?.[labelName]}</Text>
           ))}
         </View>
 

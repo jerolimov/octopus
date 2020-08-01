@@ -22,15 +22,15 @@ export default function DeploymentScreen({ route, navigation }: DeploymentScreen
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Labels</Text>
         <View style={{ padding: 15 }}>
-          {Object.keys(deployment.metadata.labels).map((labelName) => (
-            <Text>{labelName}={deployment.metadata.labels[labelName]}</Text>
+          {Object.keys(deployment.metadata.labels || {}).map((labelName) => (
+            <Text>{labelName}={deployment.metadata.labels?.[labelName]}</Text>
           ))}
         </View>
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Annotations</Text>
         <View style={{ padding: 15 }}>
-          {Object.keys(deployment.metadata.annotations).map((annotationName) => (
-            <Text>{annotationName}={deployment.metadata.annotations[annotationName]}</Text>
+          {Object.keys(deployment.metadata.annotations || {}).map((annotationName) => (
+            <Text>{annotationName}={deployment.metadata.annotations?.[annotationName]}</Text>
           ))}
         </View>
       </View>
