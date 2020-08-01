@@ -10,4 +10,5 @@ export type StackParamList = {
   Namespace: { namespace: Namespace },
   Deployments: any,
   Deployment: { deployment: Deployment },
+  ViewYaml: { yaml: any },
 }
