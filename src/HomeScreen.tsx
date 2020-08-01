@@ -34,6 +34,12 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
         <Text>Deployments</Text>
       </TouchableOpacity>
       <TouchableOpacity
+        onPress={() => navigation.navigate('ReplicaSets')}
+        style={{ backgroundColor: 'white', padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
+      >
+        <Text>ReplicaSets</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
         onPress={() => navigation.navigate('Pods')}
         style={{ backgroundColor: 'white', padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
       >

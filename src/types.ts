@@ -85,6 +85,8 @@ export interface ContainerStatus {
 export type PodStatusPhase = 'Pending' | 'Running' | 'Succeeded' | 'Failed' | 'Unknown';
 
 export interface Pod {
+  apiVersion: 'v1';
+  kind: 'Pod';
   metadata: Metadata;
   spec: PodSpec;
   status: {
@@ -141,6 +143,8 @@ export interface NamespaceList {
 export type NamespaceStatusPhase = 'Active' | 'Unknown';
 
 export interface Namespace {
+  kind: 'Namespace';
+  apiVersion: 'v1';
   metadata: Metadata;
   spec: {
     finalizers: string[];
@@ -203,3 +207,44 @@ export interface Deployment {
 }
 
 type DeploymentStatusConditionType = 'Available' | 'Progressing';
+
+export interface ReplicaSetList {
+  kind: 'ReplicaSetList';
+  apiVersion: 'apps/v1';
+  metadata: Metadata;
+  items: ReplicaSet[];
+};
+
+export interface ReplicaSet {
+  kind: 'ReplicaSet';
+  apiVersion: 'apps/v1';
+  metadata: Metadata & {
+    generation: number;
+  };
+  spec: {
+    replicas: number;
+    selector: {
+      matchLabels: Labels;
+    };
+    template: {
+      metadata: Metadata;
+    };
+    spec: {
+      containers: (Container & {
+        imagePullPolicy: 'Always';
+      })[];
+      restartPolicy: 'Always';
+      terminationGracePeriodSeconds: number;
+      dnsPolicy: 'ClusterFirst';
+      securityContext: {};
+      schedulerName: string;
+    };
+  };
+  status: {
+    replicas: number;
+    fullyLabeledReplicas: number;
+    readyReplicas: number;
+    availableReplicas: number;
+    observedGeneration: number;
+  }
+}

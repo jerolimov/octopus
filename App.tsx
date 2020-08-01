@@ -9,6 +9,8 @@ import NamespaceScreen from './src/NamespaceScreen';
 import DeploymentListScreen from './src/DeploymentListScreen';
 import DeploymentScreen from './src/DeploymentScreen';
 import CreateDeploymentScreen from './src/CreateDeploymentScreen';
+import ReplicaSetListScreen from './src/ReplicaSetListScreen';
+import ReplicaSetScreen from './src/ReplicaSetScreen';
 import PodListScreen from './src/PodListScreen';
 import PodScreen from './src/PodScreen';
 import ViewYamlScreen from './src/ViewYamlScreen';
@@ -27,6 +29,8 @@ export default function App() {
         <Stack.Screen name="Deployments" component={DeploymentListScreen} />
         <Stack.Screen name="Deployment" component={DeploymentScreen} />
         <Stack.Screen name="CreateDeployment" component={CreateDeploymentScreen} />
+        <Stack.Screen name="ReplicaSets" component={ReplicaSetListScreen} />
+        <Stack.Screen name="ReplicaSet" component={ReplicaSetScreen} />
         <Stack.Screen name="Pods" component={PodListScreen} />
         <Stack.Screen name="Pod" component={PodScreen} />
         <Stack.Screen name="ViewYaml" component={ViewYamlScreen} />
