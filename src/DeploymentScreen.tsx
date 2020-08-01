@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, Text, View, RefreshControl } from 'react-native';
+import { ScrollView, View, RefreshControl } from 'react-native';
 import { DefaultTheme } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { HeaderButtons, HeaderButton, Item, HiddenItem, OverflowMenu } from 'react-navigation-header-buttons';
@@ -8,6 +8,7 @@ import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { get, deleteIt } from './api';
 import { StackParamList } from './routes';
 import { Deployment, PodList } from './types';
+import { Container, Text } from './ThemeComponents';
 
 type DeploymentScreenProps = {
   route: { params: { deployment: Deployment } };
@@ -48,7 +49,7 @@ export default function DeploymentScreen({ route, navigation }: DeploymentScreen
 
   return (
     <ScrollView refreshControl={refreshControl}>
-      <View style={{ backgroundColor: 'white', padding: 15 }}>
+      <Container style={{ padding: 15 }}>
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Labels</Text>
         <View style={{ padding: 15 }}>
@@ -73,7 +74,7 @@ export default function DeploymentScreen({ route, navigation }: DeploymentScreen
           )) : null}
         </View>
 
-      </View>
+      </Container>
     </ScrollView>
   );
 }

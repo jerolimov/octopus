@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 import { StackParamList } from './routes';
 import { ReplicaSet, PodList } from './types';
 import { get } from './api';
+import { Container, Text } from './ThemeComponents';
 
 type ReplicaSetScreenProps = {
   route: { params: { replicaSet: ReplicaSet } };
@@ -37,7 +38,7 @@ export default function ReplicaSetScreen({ route, navigation }: ReplicaSetScreen
 
   return (
     <ScrollView>
-      <View style={{ backgroundColor: 'white', padding: 15 }}>
+      <Container style={{ padding: 15 }}>
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Labels</Text>
         <View style={{ padding: 15 }}>
@@ -68,7 +69,7 @@ export default function ReplicaSetScreen({ route, navigation }: ReplicaSetScreen
           )) : null}
         </View>
 
-      </View>
+      </Container>
     </ScrollView>
   );
 }

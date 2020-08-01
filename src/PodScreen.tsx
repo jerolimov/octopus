@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { HeaderButtons, HeaderButton, Item, HiddenItem, OverflowMenu } from 'react-navigation-header-buttons';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
@@ -9,6 +9,7 @@ import { Pod, Container, VolumeMount, ContainerStatus } from './types';
 import PodStatus from './PodStatus';
 import { DefaultTheme } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Container as ContainerView, Text } from './ThemeComponents';
 
 type PodScreenProps = {
   route: { params: { pod: Pod } };
@@ -47,7 +48,7 @@ export default function PodScreen({ route, navigation }: PodScreenProps) {
 
   return (
     <ScrollView>
-      <View style={{ backgroundColor: 'white', padding: 15 }}>
+      <ContainerView style={{ padding: 15 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', paddingBottom: 15 }}>
           <PodStatus pod={pod} />
           <Text style={{ paddingLeft: 8 }}>{pod.status.phase}</Text>
@@ -103,7 +104,7 @@ export default function PodScreen({ route, navigation }: PodScreenProps) {
             ))}
           </View>
         ) : null}
-      </View>
+      </ContainerView>
     </ScrollView>
   );
 }

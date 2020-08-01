@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 import { get } from './api';
 import { StackParamList } from './routes';
 import { Namespace, PodList } from './types';
 import NamespaceStatus from './NamespaceStatus';
+import { Container, Text } from './ThemeComponents';
 
 type NamespaceScreenProps = {
   route: { params: { namespace: Namespace } };
@@ -35,7 +36,7 @@ export default function NamespaceScreen({ route, navigation }: NamespaceScreenPr
 
   return (
     <ScrollView>
-      <View style={{ backgroundColor: 'white', padding: 15 }}>
+      <Container style={{ padding: 15 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <NamespaceStatus namespace={namespace} />
           <Text style={{ paddingLeft: 8 }}>{namespace.metadata.name}</Text>
@@ -50,7 +51,7 @@ export default function NamespaceScreen({ route, navigation }: NamespaceScreenPr
           )) : null}
         </View>
 
-      </View>
+      </Container>
     </ScrollView>
   );
 }

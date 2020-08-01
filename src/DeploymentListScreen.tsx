@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, Text, RefreshControl } from 'react-native';
+import { ScrollView, RefreshControl } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { HeaderButtons, HeaderButton, Item, HiddenItem, OverflowMenu } from 'react-navigation-header-buttons';
@@ -9,6 +9,7 @@ import { get } from './api';
 import { StackParamList } from './routes';
 import { DeploymentList, Deployment } from './types';
 import { DefaultTheme } from '@react-navigation/native';
+import { Container, Text } from './ThemeComponents';
 
 type DeploymentListScreenProps = {
   navigation: StackNavigationProp<StackParamList, 'Deployments'>,
@@ -39,8 +40,10 @@ export default function DeploymentListScreen({ navigation }: DeploymentListScree
 
   return (
     <ScrollView refreshControl={refreshControl}>
-      {error ? <Text>{JSON.stringify(error, null, 2)}</Text> : null}
-      {deployments ? deployments.items.map((deployment, key) => <DeploymentView {...{key, deployment, navigation}} />) : null}
+      <Container>
+        {error ? <Text>{JSON.stringify(error, null, 2)}</Text> : null}
+        {deployments ? deployments.items.map((deployment, key) => <DeploymentView {...{key, deployment, navigation}} />) : null}
+      </Container>
     </ScrollView>
   );
 }
@@ -56,7 +59,7 @@ function DeploymentView({ deployment, navigation }: DeploymentViewProps) {
   return (
     <TouchableOpacity
       onPress={() => navigation.push('Deployment', { deployment })}
-      style={{ backgroundColor: 'white', padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
+      style={{ padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
     >
       <Text style={{ minWidth: 80 }}>{x} / {y} ready</Text>
       <Text style={{ paddingLeft: 8 }}>{deployment.metadata.name}</Text>

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { ScrollView, Text, TextInput, Button } from 'react-native';
+import { ScrollView, TextInput, Button } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 import { StackParamList } from './routes';
 import { post } from './api';
 import { Deployment } from './types';
+import { Container, Text } from './ThemeComponents';
 
 type CreateDeploymentScreenProps = {
   navigation: StackNavigationProp<StackParamList, 'CreateDeployment'>,
@@ -61,23 +62,25 @@ export default function CreateDeploymentScreen({ navigation }: CreateDeploymentS
   };
 
   return (
-    <ScrollView style={{ backgroundColor: 'white', padding: 15 }}>
-      <Text>Name:</Text>
-      <TextInput
-        value={name}
-        onChangeText={setName}
-        style={{ color: 'black', borderWidth: 1, borderColor: 'lightgray', borderRadius: 5 }}
-      />
-      <Text>Image:</Text>
-      <TextInput
-        value={image}
-        onChangeText={setImage}
-        style={{ color: 'black', borderWidth: 1, borderColor: 'lightgray', borderRadius: 5 }}
-      />
-      <Button
-        title="Create"
-        onPress={create}
-      />
+    <ScrollView style={{ padding: 15 }}>
+      <Container>
+        <Text>Name:</Text>
+        <TextInput
+          value={name}
+          onChangeText={setName}
+          style={{ color: 'black', borderWidth: 1, borderColor: 'lightgray', borderRadius: 5 }}
+          />
+        <Text>Image:</Text>
+        <TextInput
+          value={image}
+          onChangeText={setImage}
+          style={{ color: 'black', borderWidth: 1, borderColor: 'lightgray', borderRadius: 5 }}
+          />
+        <Button
+          title="Create"
+          onPress={create}
+        />
+      </Container>
     </ScrollView>
   );
 }
