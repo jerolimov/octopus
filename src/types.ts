@@ -7,6 +7,18 @@ type Labels = Record<string, string>;
 type Annotations = Record<string, string>;
 type BooleanString = 'True' | 'False';
 
+export interface Version {
+  major: string;
+  minor: string;
+  gitVersion: string;
+  gitCommit: string;
+  gitTreeState: string;
+  buildDate: string;
+  goVersion: string;
+  compiler: string;
+  platform: string;
+}
+
 export interface OwnerReferences {
   apiVersion: ApiVersion;
   kind: Kind;

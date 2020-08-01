@@ -6,9 +6,9 @@ import { DefaultTheme } from '@react-navigation/native';
 import { HeaderButtons, HeaderButton, Item, HiddenItem, OverflowMenu } from 'react-navigation-header-buttons';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 
-import { watch } from './api';
+import { watch, get } from './api';
 import { StackParamList } from './routes';
-import { Pod } from './types';
+import { Pod, Version } from './types';
 import { Container, Text } from './ThemeComponents';
 
 type HomeScreenProps = {
@@ -27,6 +27,11 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
       console.warn('onMessage', type, pod.status.phase, pod.metadata.name);
     });
   }, []);
+
+  const [version, setVersion] = useState<Version>();
+  useEffect(() => {
+    get<Version>('version').then(setVersion, () => {});
+  })
 
   return (
     <ScrollView>
@@ -55,6 +60,12 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
         >
           <Text>Pods</Text>
         </TouchableOpacity>
+
+        {version ? (
+          <View style={{ padding: 15 }}>
+            <Text>Version: {version.major}.{version.minor} ({version.gitVersion})</Text>
+          </View>
+        ) : null}
       </Container>
     </ScrollView>
   );
