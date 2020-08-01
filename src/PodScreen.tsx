@@ -21,13 +21,15 @@ interface MappedContainer {
 }
 
 export default function PodScreen({ route, navigation }: PodScreenProps) {
+  const pod = route.params.pod;
+
   React.useLayoutEffect(() => {
     navigation.setOptions({
+      title: pod.metadata.name,
+      headerBackTitleVisible: false,
       headerRight: () => <PodScreenHeaderRight {...{route, navigation}} />,
     });
   }, [navigation]);
-
-  const pod = route.params.pod;
 
   const mappedContainers: Record<string, MappedContainer> = {};
   pod.spec.containers.forEach((container) => {
@@ -51,7 +53,6 @@ export default function PodScreen({ route, navigation }: PodScreenProps) {
           <Text style={{ paddingLeft: 8 }}>{pod.status.phase}</Text>
         </View>
 
-        <Text style={{ fontWeight: 'bold' }}>Name: {pod.metadata.name}</Text>
         <Text>Namespace: {pod.metadata.namespace}</Text>
         <Text>UID: {pod.metadata.uid}</Text>
 
