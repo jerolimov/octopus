@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { DefaultTheme } from '@react-navigation/native';
@@ -59,6 +59,12 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
           style={{ padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
         >
           <Text>Pods</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('CustomResourceDefinitions')}
+          style={{ padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
+        >
+          <Text>CustomResourceDefinitions</Text>
         </TouchableOpacity>
 
         {version ? (

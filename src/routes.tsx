@@ -1,4 +1,4 @@
-import { Pod, Namespace, Deployment, ReplicaSet } from "./types";
+import { Pod, Namespace, Deployment, ReplicaSet, CustomResourceDefinition } from "./types";
 
 export type StackParamList = {
   Home: any,
@@ -12,6 +12,8 @@ export type StackParamList = {
   Deployment: { deployment: Deployment },
   ReplicaSets: any,
   ReplicaSet: { replicaSet: ReplicaSet }
+  CustomResourceDefinitions: any;
+  CustomResourceDefinition: { customResourceDefinition: CustomResourceDefinition };
   CreateDeployment: any,
   ViewYaml: { yaml: any },
 }

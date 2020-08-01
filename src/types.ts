@@ -260,3 +260,73 @@ export interface ReplicaSet {
     observedGeneration: number;
   }
 }
+
+export interface CustomResourceDefinitionList {
+  apiVersion: 'apiextensions.k8s.io/v1';
+  kind: 'CustomResourceDefinitionList';
+  metadata: Metadata;
+  items: CustomResourceDefinition[];
+}
+
+export interface CustomResourceDefinition {
+  apiVersion: 'apiextensions.k8s.io/v1';
+  kind: 'CustomResourceDefinitionList';
+  metadata: Metadata;
+  spec: {
+    group: string;
+    names: {
+      listKind: string;
+      kind: string;
+      singular: string;
+      plural: string;
+      categories: string[];      
+    };
+    scope: 'Cluster' | 'Namespaced';
+    versions: {
+      name: string;
+      served: boolean;
+      storage: boolean;
+      schema: {
+        openAPIV3Schema: {
+          type: 'object';
+          'x-kubernetes-preserve-unknown-fields': boolean;
+        };
+      };
+      subresources: {
+        status: {};
+      };
+    }[];
+    conversion: {
+      strategy: 'Webhook';
+      webhook: {
+        clientConfig: {
+          service: {
+            namespace: string;
+            name: string;
+            path: string;
+            port: number;
+          };
+          caBundle: string;
+        };
+        conversionReviewVersions: string[];
+      };
+    };
+    status: {
+      conditions: {
+        type: string;
+        status: string;
+        lastTransitionTime: DateTimeString;
+        reason: string;
+        message: string;
+      }[];
+      acceptedNames: {
+        listKind: string;
+        kind: string;
+        singular: string;
+        plural: string;
+        categories: string[];      
+      };
+      storedVersions: string[];
+    };
+  };
+}

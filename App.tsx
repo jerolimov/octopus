@@ -14,6 +14,8 @@ import ReplicaSetListScreen from './src/ReplicaSetListScreen';
 import ReplicaSetScreen from './src/ReplicaSetScreen';
 import PodListScreen from './src/PodListScreen';
 import PodScreen from './src/PodScreen';
+import CustomResourceDefinitionListScreen from './src/CustomResourceDefinitionListScreen';
+import CustomResourceDefinitionScreen from './src/CustomResourceDefinitionScreen';
 import ViewYamlScreen from './src/ViewYamlScreen';
 
 import { StackParamList } from './src/routes';
@@ -36,6 +38,8 @@ export default function App() {
         <Stack.Screen name="ReplicaSet" component={ReplicaSetScreen} />
         <Stack.Screen name="Pods" component={PodListScreen} />
         <Stack.Screen name="Pod" component={PodScreen} />
+        <Stack.Screen name="CustomResourceDefinitions" component={CustomResourceDefinitionListScreen} />
+        <Stack.Screen name="CustomResourceDefinition" component={CustomResourceDefinitionScreen} />
         <Stack.Screen name="ViewYaml" component={ViewYamlScreen} />
       </Stack.Navigator>
     </NavigationContainer>
