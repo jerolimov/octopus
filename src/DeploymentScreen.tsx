@@ -47,8 +47,8 @@ export default function DeploymentScreen({ route, navigation }: DeploymentScreen
   );
 
   return (
-    <ScrollView refreshControl={refreshControl} style={{ backgroundColor: 'white' }}>
-      <View style={{ padding: 15 }}>
+    <ScrollView refreshControl={refreshControl}>
+      <View style={{ backgroundColor: 'white', padding: 15 }}>
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Labels</Text>
         <View style={{ padding: 15 }}>

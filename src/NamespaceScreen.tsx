@@ -34,8 +34,8 @@ export default function NamespaceScreen({ route, navigation }: NamespaceScreenPr
   console.log('pods', pods);
 
   return (
-    <ScrollView style={{ backgroundColor: 'white' }}>
-      <View style={{ padding: 15 }}>
+    <ScrollView>
+      <View style={{ backgroundColor: 'white', padding: 15 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <NamespaceStatus namespace={namespace} />
           <Text style={{ paddingLeft: 8 }}>{namespace.metadata.name}</Text>

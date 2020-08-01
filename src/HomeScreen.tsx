@@ -28,7 +28,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
   }, []);
 
   return (
-    <ScrollView style={{ backgroundColor: 'white' }}>
+    <ScrollView>
       <TouchableOpacity
         onPress={() => navigation.navigate('Namespaces')}
         style={{ backgroundColor: 'white', padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}

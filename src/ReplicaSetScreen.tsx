@@ -36,8 +36,8 @@ export default function ReplicaSetScreen({ route, navigation }: ReplicaSetScreen
   console.log('pods', pods);
 
   return (
-    <ScrollView style={{ backgroundColor: 'white' }}>
-      <View style={{ padding: 15 }}>
+    <ScrollView>
+      <View style={{ backgroundColor: 'white', padding: 15 }}>
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Labels</Text>
         <View style={{ padding: 15 }}>
