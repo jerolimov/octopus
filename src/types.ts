@@ -26,7 +26,7 @@ export interface Metadata {
   creationTimestamp: DateTimeString;
   labels?: Labels;
   annotations?: Annotations;
-  ownerReferences: OwnerReferences;
+  ownerReferences?: OwnerReferences[];
   managedFields: {
     manager: string;
     operation: string;
@@ -62,6 +62,8 @@ export interface Condition {
   status: string;
   lastProbeTime: DateTimeString;
   lastTransitionTime: DateTimeString;
+  reason: string;
+  message: string;
 }
 
 export interface ContainerStatus {

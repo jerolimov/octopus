@@ -8,6 +8,7 @@ import { StackParamList } from './routes';
 import { Pod, Container, VolumeMount, ContainerStatus } from './types';
 import PodStatus from './PodStatus';
 import { DefaultTheme } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 type PodScreenProps = {
   route: { params: { pod: Pod } };
@@ -45,20 +46,62 @@ export default function PodScreen({ route, navigation }: PodScreenProps) {
   return (
     <ScrollView style={{ backgroundColor: 'white' }}>
       <View style={{ padding: 15 }}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', paddingBottom: 15 }}>
           <PodStatus pod={pod} />
-          <Text style={{ paddingLeft: 8 }}>{pod.metadata.name}</Text>
+          <Text style={{ paddingLeft: 8 }}>{pod.status.phase}</Text>
         </View>
+
+        <Text style={{ fontWeight: 'bold' }}>Name: {pod.metadata.name}</Text>
+        <Text>Namespace: {pod.metadata.namespace}</Text>
+        <Text>UID: {pod.metadata.uid}</Text>
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Labels</Text>
         <View style={{ padding: 15 }}>
           {Object.keys(pod.metadata.labels || {}).map((labelName) => (
-            <Text key={labelName}>{labelName}={pod.metadata.labels?.[labelName]}</Text>
+            <Text key={labelName}>{labelName}: {pod.metadata.labels?.[labelName]}</Text>
           ))}
         </View>
 
+        <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Conditions</Text>
+        <View style={{ padding: 15 }}>
+          {pod.status.conditions.map((condition, index) => (
+            <View key={index} style={{ paddingBottom: 15 }}>
+              <Text>Type: {condition.type}</Text>
+              <Text>Status: {condition.status}</Text>
+              <Text>Last probe time: {condition.lastProbeTime}</Text>
+              <Text>Last transiton time: {condition.lastTransitionTime}</Text>
+              <Text>Reason: {condition.reason}</Text>
+              <Text>Message: {condition.message}</Text>
+            </View>
+          ))}
+        </View>
+
+        <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Host and IPs</Text>
+        <TouchableOpacity onPress={() => alert('TODO open node ' + pod.spec.nodeName)}>
+          <Text>Node: <Text style={{ color: 'blue', textDecorationLine: 'underline' }}>{pod.spec.nodeName}</Text></Text>
+        </TouchableOpacity>
+        <Text>Host IP: {pod.status.hostIP}</Text>
+        <Text>Pod IP: {pod.status.podIP}</Text>
+        <Text>QoS class: {pod.status.qosClass}</Text>
+
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Containers</Text>
         {Object.values(mappedContainers).map((mappedContainer, key) => <ContainerItem {...{key}} {...mappedContainer} />)}
+
+        {pod.metadata.ownerReferences && pod.metadata.ownerReferences.length > 0 ? (
+          <View>
+            <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>
+              {pod.metadata.ownerReferences.length === 1 ? 'Owner' : 'Owners'}
+            </Text>
+            {pod.metadata.ownerReferences?.map((ownerReference, index) => (
+              <View key={index} style={{ paddingVertical: 10 }}>
+                <Text>apiVersion: {ownerReference.apiVersion}</Text>
+                <Text>kind: {ownerReference.kind}</Text>
+                <Text>name: {ownerReference.name}</Text>
+                <Text>UID: {ownerReference.uid}</Text>
+              </View>
+            ))}
+          </View>
+        ) : null}
       </View>
     </ScrollView>
   );
