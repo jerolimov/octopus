@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ScrollView, Text, RefreshControl } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { HeaderButtons, HeaderButton, Item, HiddenItem, OverflowMenu } from 'react-navigation-header-buttons';
@@ -24,14 +24,21 @@ export default function DeploymentListScreen({ navigation }: DeploymentListScree
     });
   }, [navigation]);
 
-  useEffect(() => {
-    get<DeploymentList>('apis/apps/v1/namespaces/default/deployments').then(setDeployments, setError);
-  }, []);
+  const [refreshing, setRefreshing] = useState(false);
+  const onRefresh = () => {
+    setRefreshing(true);
+    Promise.all([
+      get<DeploymentList>('apis/apps/v1/namespaces/default/deployments').then(setDeployments, setError),
+    ]).finally(() => setRefreshing(false));
+  };
+  useEffect(onRefresh, []);
 
-  console.log('deployments', deployments);
+  const refreshControl = (
+    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+  );
 
   return (
-    <ScrollView>
+    <ScrollView refreshControl={refreshControl}>
       {error ? <Text>{JSON.stringify(error, null, 2)}</Text> : null}
       {deployments ? deployments.items.map((deployment, key) => <DeploymentView {...{key, deployment, navigation}} />) : null}
     </ScrollView>

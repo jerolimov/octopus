@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text, View, RefreshControl } from 'react-native';
 import { DefaultTheme } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { HeaderButtons, HeaderButton, Item, HiddenItem, OverflowMenu } from 'react-navigation-header-buttons';
@@ -15,7 +15,9 @@ type DeploymentScreenProps = {
 }
 
 export default function DeploymentScreen({ route, navigation }: DeploymentScreenProps) {
-  const deployment = route.params.deployment;
+  const [deployment, setDeployment] = useState<Deployment>(route.params.deployment);
+  const [pods, setPods] = useState<PodList>();
+  const [error, setError] = useState<Error>();
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -23,24 +25,29 @@ export default function DeploymentScreen({ route, navigation }: DeploymentScreen
       headerBackTitleVisible: false,
       headerRight: () => <DeploymentScreenHeaderRight {...{route, navigation}} />,
     });
-  }, [navigation]);
+  }, [deployment, navigation]);
 
-  const [pods, setPods] = useState<PodList>();
-  const [error, setError] = useState<Error>();
-
-  useEffect(() => {
+  const [refreshing, setRefreshing] = useState(false);
+  const onRefresh = () => {
+    setRefreshing(true);
     const matchLabels = deployment.spec?.selector?.matchLabels || {};
 
     const labelSelector = Object.entries(matchLabels).map(([name, value]) => name + '=' + value).join(',');
     const query = '?labelSelector=' + encodeURIComponent(labelSelector);
 
-    get<PodList>('api/v1/namespaces/default/pods' + query).then(setPods, setError);
-  }, []);
+    Promise.all([
+      get<Deployment>(deployment.metadata.selfLink).then(setDeployment, setError),
+      get<PodList>('api/v1/namespaces/default/pods' + query).then(setPods, setError),
+    ]).finally(() => setRefreshing(false));
+  };
+  useEffect(onRefresh, []);
 
-  console.log('pods', pods);
+  const refreshControl = (
+    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+  );
 
   return (
-    <ScrollView style={{ backgroundColor: 'white' }}>
+    <ScrollView refreshControl={refreshControl} style={{ backgroundColor: 'white' }}>
       <View style={{ padding: 15 }}>
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Labels</Text>
