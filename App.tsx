@@ -16,6 +16,11 @@ import PodListScreen from './src/PodListScreen';
 import PodScreen from './src/PodScreen';
 import CustomResourceDefinitionListScreen from './src/CustomResourceDefinitionListScreen';
 import CustomResourceDefinitionScreen from './src/CustomResourceDefinitionScreen';
+import APIGroupListScreen from './src/APIGroupListScreen';
+import APIGroupScreen from './src/APIGroupScreen';
+import APIResourceListScreen from './src/APIResourceListScreen';
+import APIServiceListScreen from './src/APIServiceListScreen';
+import APIServiceScreen from './src/APIServiceScreen';
 import ViewYamlScreen from './src/ViewYamlScreen';
 
 import { StackParamList } from './src/routes';
@@ -40,6 +45,11 @@ export default function App() {
         <Stack.Screen name="Pod" component={PodScreen} />
         <Stack.Screen name="CustomResourceDefinitions" component={CustomResourceDefinitionListScreen} />
         <Stack.Screen name="CustomResourceDefinition" component={CustomResourceDefinitionScreen} />
+        <Stack.Screen name="APIGroups" component={APIGroupListScreen} />
+        <Stack.Screen name="APIGroup" component={APIGroupScreen} />
+        <Stack.Screen name="APIResources" component={APIResourceListScreen} />
+        <Stack.Screen name="APIServices" component={APIServiceListScreen} />
+        <Stack.Screen name="APIService" component={APIServiceScreen} />
         <Stack.Screen name="ViewYaml" component={ViewYamlScreen} />
       </Stack.Navigator>
     </NavigationContainer>

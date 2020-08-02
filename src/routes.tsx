@@ -14,6 +14,11 @@ export type StackParamList = {
   ReplicaSet: { replicaSet: ReplicaSet }
   CustomResourceDefinitions: any;
   CustomResourceDefinition: { customResourceDefinition: CustomResourceDefinition };
+  APIGroups: { path: string };
+  APIGroup: { path: string };
+  APIResources: { path: string };
+  APIServices: { path: string };
+  APIService: { path: string };
   CreateDeployment: any,
   ViewYaml: { yaml: any },
 }

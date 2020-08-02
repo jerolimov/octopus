@@ -330,3 +330,66 @@ export interface CustomResourceDefinition {
     };
   };
 }
+
+export interface APIGroupList {
+  apiVersion: 'v1';
+  kind: 'APIGroupList';
+  groups: APIGroup[];
+}
+
+export interface APIGroup {
+  apiVersion: 'v1';
+  kind: 'APIGroup';
+  name: string;
+  versions: APIGroupVersion[];
+  preferredVersion: APIGroupVersion;
+}
+
+export interface APIGroupVersion {
+  groupVersion: string;
+  version: string;
+}
+
+export interface APIResourceList {
+  apiVersion: 'v1';
+  kind: 'APIResource';
+  groupVersion: string;
+  resources: APIResource[];
+}
+
+export interface APIResource {
+  name: string;
+  singularName: string;
+  namespaced: boolean;
+  kind: string;
+  verbs: string[];
+  shortNames: string[];
+  storageVersionHash: string;
+}
+
+export interface APIServiceList {
+  apiVersion: 'apiregistration.k8s.io/v1';
+  kind: 'APIServiceList';
+  items: APIService[];
+}
+
+export interface APIService {
+  apiVersion: 'apiregistration.k8s.io/v1';
+  kind: 'APIService';
+  metadata: Metadata;
+  spec: {
+    group: string;
+    version: string;
+    groupPriorityMinimum: number;
+    versionPriority: number;
+  };
+  status: {
+    conditions: {
+      type: 'Available';
+      status: BooleanString;
+      lastTransitionTime: DateTimeString;
+      reason: string;
+      message: string;
+    }[];
+  };
+}

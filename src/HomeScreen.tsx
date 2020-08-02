@@ -66,6 +66,36 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
         >
           <Text>CustomResourceDefinitions</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('APIGroups', { path: 'apis' })}
+          style={{ padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
+        >
+          <Text>APIGroups</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('APIGroup', { path: 'apis/apiregistration.k8s.io' })}
+          style={{ padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
+        >
+          <Text>APIGroup apis/apiregistration.k8s.io</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('APIResources', { path: 'apis/apiregistration.k8s.io/v1' })}
+          style={{ padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
+        >
+          <Text>APIResources apis/apiregistration.k8s.io/v1</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('APIServices', { path: 'apis/apiregistration.k8s.io/v1/apiservices' })}
+          style={{ padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
+        >
+          <Text>APIServices apis/apiregistration.k8s.io/v1/apiservices</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('APIService', { path: 'apis/apiregistration.k8s.io/v1/apiservices/v1.admissionregistration.k8s.io' })}
+          style={{ padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
+        >
+          <Text>APIService apis/apiregistration.k8s.io/v1/apiservices/v1.admissionregistration.k8s.io</Text>
+        </TouchableOpacity>
 
         {version ? (
           <View style={{ padding: 15 }}>
