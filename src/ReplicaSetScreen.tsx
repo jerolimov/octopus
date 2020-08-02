@@ -40,15 +40,15 @@ export default function ReplicaSetScreen({ route, navigation }: ReplicaSetScreen
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Labels</Text>
         <View style={{ padding: 15 }}>
-          {Object.keys(replicaSet.metadata.labels || {}).map((labelName) => (
-            <Text>{labelName}={replicaSet.metadata.labels?.[labelName]}</Text>
+          {Object.keys(replicaSet.metadata.labels || {}).map((labelName, index) => (
+            <Text key={index}>{labelName}={replicaSet.metadata.labels?.[labelName]}</Text>
           ))}
         </View>
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Annotations</Text>
         <View style={{ padding: 15 }}>
-          {Object.keys(replicaSet.metadata.annotations || {}).map((annotationName) => (
-            <Text>{annotationName}={replicaSet.metadata.annotations?.[annotationName]}</Text>
+          {Object.keys(replicaSet.metadata.annotations || {}).map((annotationName, index) => (
+            <Text key={index}>{annotationName}={replicaSet.metadata.annotations?.[annotationName]}</Text>
           ))}
         </View>
 
