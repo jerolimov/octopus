@@ -48,14 +48,12 @@ function CustomResourceDefinitionView({ customResourceDefinition, navigation }: 
   return (
     <TouchableOpacity
       onPress={() => navigation.push('CustomResourceDefinition', { customResourceDefinition })}
-      style={{ padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
+      style={{ padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1 }}
     >
-      <Text>
-        <Text style={{ fontWeight: 'bold' }}>{customResourceDefinition.spec.names.kind}</Text>
-        <Text>Group: {customResourceDefinition.spec.group}</Text>
-        <Text>Full name: {customResourceDefinition.metadata.name}</Text>
-        <Text>Scope: {customResourceDefinition.spec.scope}</Text>
-      </Text>
+      <Text style={{ fontWeight: 'bold' }}>{customResourceDefinition.spec.names.kind}</Text>
+      <Text>Group: {customResourceDefinition.spec.group}</Text>
+      <Text>Full name: {customResourceDefinition.metadata.name}</Text>
+      <Text>Scope: {customResourceDefinition.spec.scope}</Text>
     </TouchableOpacity>
   );
 }
