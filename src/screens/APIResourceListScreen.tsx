@@ -3,14 +3,14 @@ import { ScrollView, RefreshControl } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import { get } from './api';
-import { StackParamList } from './routes';
-import { APIResourceList, APIResource } from './types';
-import { Container, Text } from './ThemeComponents';
+import { get } from '../api';
+import { StackParamList } from '../routes';
+import { APIResourceList, APIResource } from '../types';
+import { Container, Text } from '../components/ThemeComponents';
 
 type APIResourceListScreenProps = {
   route: { params: { path: string } };
-  navigation: StackNavigationProp<StackParamList, 'APIResources'>,
+  navigation: StackNavigationProp<StackParamList, 'APIResourceList'>,
 }
 
 export default function APIResourceListScreen({ route, navigation }: APIResourceListScreenProps) {
@@ -45,13 +45,13 @@ export default function APIResourceListScreen({ route, navigation }: APIResource
 type APIResourceViewProps = {
   prefixPath: string;
   apiResource: APIResource;
-  navigation: StackNavigationProp<StackParamList, 'APIResources'>;
+  navigation: StackNavigationProp<StackParamList, 'APIResourceList'>;
 }
 
 function APIResourceView({ prefixPath, apiResource, navigation }: APIResourceViewProps) {
   const open = () => {
     if (apiResource.kind === 'APIService') {
-      navigation.push('APIServices', { path: prefixPath + '/' + apiResource.name });
+      navigation.push('APIServiceList', { path: prefixPath + '/' + apiResource.name });
     } else {
       alert('Unknown resource type ' + apiResource.kind);
     }

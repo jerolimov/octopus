@@ -6,18 +6,18 @@ export type StackParamList = {
   OCLogin: any,
   Pods: any,
   Pod: { pod: Pod },
-  Namespaces: any,
+  NamespaceList: any,
   Namespace: { namespace: Namespace },
-  Deployments: any,
+  DeploymentList: any,
   Deployment: { deployment: Deployment },
-  ReplicaSets: any,
+  ReplicaSetList: any,
   ReplicaSet: { replicaSet: ReplicaSet }
-  CustomResourceDefinitions: any;
+  CustomResourceDefinitionList: any;
   CustomResourceDefinition: { customResourceDefinition: CustomResourceDefinition };
-  APIGroups: { path: string };
+  APIGroupList: { path: string };
   APIGroup: { path: string };
-  APIResources: { path: string };
-  APIServices: { path: string };
+  APIResourceList: { path: string };
+  APIServiceList: { path: string };
   APIService: { path: string };
   CreateDeployment: any,
   ViewYaml: { yaml: any },

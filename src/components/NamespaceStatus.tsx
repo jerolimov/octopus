@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import { Namespace } from "./types";
-import { NamespaceStatusPhaseColors } from "./colors";
+import { Namespace } from "../types";
+import { NamespaceStatusPhaseColors } from "../colors";
 
 export default function NamespaceStatus({ namespace }: { namespace: Namespace }) {
   const color = NamespaceStatusPhaseColors[namespace.status.phase] || NamespaceStatusPhaseColors.Unknown;

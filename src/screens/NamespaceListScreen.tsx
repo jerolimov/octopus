@@ -3,15 +3,15 @@ import { ScrollView, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import { get } from './api';
-import { StackParamList } from './routes';
-import { NamespaceList, Namespace } from './types';
-import NamespaceStatus from './NamespaceStatus';
-import { filterSystemNamespace } from './utils';
-import { Container, Text, Switch } from './ThemeComponents';
+import { get } from '../api';
+import { StackParamList } from '../routes';
+import { NamespaceList, Namespace } from '../types';
+import NamespaceStatus from '../components/NamespaceStatus';
+import { filterSystemNamespace } from '../utils';
+import { Container, Text, Switch } from '../components/ThemeComponents';
 
 type NamespaceListScreenProps = {
-  navigation: StackNavigationProp<StackParamList, 'Namespaces'>,
+  navigation: StackNavigationProp<StackParamList, 'NamespaceList'>,
 }
 
 export default function NamespaceListScreen({ navigation }: NamespaceListScreenProps) {
@@ -44,7 +44,7 @@ export default function NamespaceListScreen({ navigation }: NamespaceListScreenP
 
 type NamespaceViewProps = {
   namespace: Namespace;
-  navigation: StackNavigationProp<StackParamList, 'Namespaces'>;
+  navigation: StackNavigationProp<StackParamList, 'NamespaceList'>;
 }
 
 function NamespaceView({ namespace, navigation }: NamespaceViewProps) {

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { ScrollView, RefreshControl, View } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import { get } from './api';
-import { StackParamList } from './routes';
-import { APIService } from './types';
-import { Container, Text } from './ThemeComponents';
+import { get } from '../api';
+import { StackParamList } from '../routes';
+import { APIService } from '../types';
+import { Container, Text } from '../components/ThemeComponents';
 
 type APIServiceScreenProps = {
   route: { params: { path: string } };

@@ -3,14 +3,14 @@ import { ScrollView, RefreshControl } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import { get } from './api';
-import { StackParamList } from './routes';
-import { APIServiceList, APIService } from './types';
-import { Container, Text } from './ThemeComponents';
+import { get } from '../api';
+import { StackParamList } from '../routes';
+import { APIServiceList, APIService } from '../types';
+import { Container, Text } from '../components/ThemeComponents';
 
 type APIServiceListScreenProps = {
   route: { params: { path: string } };
-  navigation: StackNavigationProp<StackParamList, 'APIServices'>,
+  navigation: StackNavigationProp<StackParamList, 'APIServiceList'>,
 }
 
 export default function APIServiceListScreen({ route, navigation }: APIServiceListScreenProps) {
@@ -45,7 +45,7 @@ export default function APIServiceListScreen({ route, navigation }: APIServiceLi
 type APIServiceViewProps = {
   prefixPath: string;
   apiService: APIService;
-  navigation: StackNavigationProp<StackParamList, 'APIServices'>;
+  navigation: StackNavigationProp<StackParamList, 'APIServiceList'>;
 }
 
 function APIServiceView({ prefixPath, apiService, navigation }: APIServiceViewProps) {

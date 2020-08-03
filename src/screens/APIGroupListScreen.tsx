@@ -3,14 +3,14 @@ import { ScrollView, RefreshControl } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import { get } from './api';
-import { StackParamList } from './routes';
-import { APIGroupList, APIGroup } from './types';
-import { Container, Text } from './ThemeComponents';
+import { get } from '../api';
+import { StackParamList } from '../routes';
+import { APIGroupList, APIGroup } from '../types';
+import { Container, Text } from '../components/ThemeComponents';
 
 type APIGroupListScreenProps = {
   route: { params: { path: string } };
-  navigation: StackNavigationProp<StackParamList, 'APIGroups'>,
+  navigation: StackNavigationProp<StackParamList, 'APIGroupList'>,
 }
 
 export default function APIGroupListScreen({ route, navigation }: APIGroupListScreenProps) {
@@ -45,7 +45,7 @@ export default function APIGroupListScreen({ route, navigation }: APIGroupListSc
 type APIGroupViewProps = {
   prefixPath: string;
   apiGroup: APIGroup;
-  navigation: StackNavigationProp<StackParamList, 'APIGroups'>;
+  navigation: StackNavigationProp<StackParamList, 'APIGroupList'>;
 }
 
 function APIGroupView({ prefixPath, apiGroup, navigation }: APIGroupViewProps) {
@@ -60,7 +60,7 @@ function APIGroupView({ prefixPath, apiGroup, navigation }: APIGroupViewProps) {
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => navigation.push('APIResources', { path: prefixPath + '/' + apiGroup.preferredVersion.groupVersion })}
+        onPress={() => navigation.push('APIResourceList', { path: prefixPath + '/' + apiGroup.preferredVersion.groupVersion })}
         style={{ padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
       >
         <Text>

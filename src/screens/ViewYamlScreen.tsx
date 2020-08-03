@@ -3,7 +3,7 @@ import { ScrollView, Text, Platform } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import YAML from 'yaml';
 
-import { StackParamList } from './routes';
+import { StackParamList } from '../routes';
 
 type DeploymentScreenProps = {
   route: { params: { yaml: any } };

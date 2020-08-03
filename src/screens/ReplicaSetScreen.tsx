@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { ScrollView, View } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import { StackParamList } from './routes';
-import { ReplicaSet, PodList } from './types';
-import { get } from './api';
-import { Container, Text } from './ThemeComponents';
+import { StackParamList } from '../routes';
+import { ReplicaSet, PodList } from '../types';
+import { get } from '../api';
+import { Container, Text } from '../components/ThemeComponents';
 
 type ReplicaSetScreenProps = {
   route: { params: { replicaSet: ReplicaSet } };
-  navigation: StackNavigationProp<StackParamList, 'ReplicaSets'>,
+  navigation: StackNavigationProp<StackParamList, 'ReplicaSetList'>,
 }
 
 export default function ReplicaSetScreen({ route, navigation }: ReplicaSetScreenProps) {

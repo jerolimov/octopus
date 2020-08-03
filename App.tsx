@@ -4,24 +4,24 @@ import { useColorScheme } from 'react-native';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import HomeScreen from './src/HomeScreen';
-import NamespaceListScreen from './src/NamespaceListScreen';
-import NamespaceScreen from './src/NamespaceScreen';
-import DeploymentListScreen from './src/DeploymentListScreen';
-import DeploymentScreen from './src/DeploymentScreen';
-import CreateDeploymentScreen from './src/CreateDeploymentScreen';
-import ReplicaSetListScreen from './src/ReplicaSetListScreen';
-import ReplicaSetScreen from './src/ReplicaSetScreen';
-import PodListScreen from './src/PodListScreen';
-import PodScreen from './src/PodScreen';
-import CustomResourceDefinitionListScreen from './src/CustomResourceDefinitionListScreen';
-import CustomResourceDefinitionScreen from './src/CustomResourceDefinitionScreen';
-import APIGroupListScreen from './src/APIGroupListScreen';
-import APIGroupScreen from './src/APIGroupScreen';
-import APIResourceListScreen from './src/APIResourceListScreen';
-import APIServiceListScreen from './src/APIServiceListScreen';
-import APIServiceScreen from './src/APIServiceScreen';
-import ViewYamlScreen from './src/ViewYamlScreen';
+import HomeScreen from './src/screens/HomeScreen';
+import NamespaceListScreen from './src/screens/NamespaceListScreen';
+import NamespaceScreen from './src/screens/NamespaceScreen';
+import DeploymentListScreen from './src/screens/DeploymentListScreen';
+import DeploymentScreen from './src/screens/DeploymentScreen';
+import CreateDeploymentScreen from './src/screens/CreateDeploymentScreen';
+import ReplicaSetListScreen from './src/screens/ReplicaSetListScreen';
+import ReplicaSetScreen from './src/screens/ReplicaSetScreen';
+import PodListScreen from './src/screens/PodListScreen';
+import PodScreen from './src/screens/PodScreen';
+import CustomResourceDefinitionListScreen from './src/screens/CustomResourceDefinitionListScreen';
+import CustomResourceDefinitionScreen from './src/screens/CustomResourceDefinitionScreen';
+import APIGroupListScreen from './src/screens/APIGroupListScreen';
+import APIGroupScreen from './src/screens/APIGroupScreen';
+import APIResourceListScreen from './src/screens/APIResourceListScreen';
+import APIServiceListScreen from './src/screens/APIServiceListScreen';
+import APIServiceScreen from './src/screens/APIServiceScreen';
+import ViewYamlScreen from './src/screens/ViewYamlScreen';
 
 import { StackParamList } from './src/routes';
 
@@ -34,21 +34,21 @@ export default function App() {
     <NavigationContainer theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Namespaces" component={NamespaceListScreen} />
+        <Stack.Screen name="NamespaceList" component={NamespaceListScreen} />
         <Stack.Screen name="Namespace" component={NamespaceScreen} />
-        <Stack.Screen name="Deployments" component={DeploymentListScreen} />
+        <Stack.Screen name="DeploymentList" component={DeploymentListScreen} />
         <Stack.Screen name="Deployment" component={DeploymentScreen} />
         <Stack.Screen name="CreateDeployment" component={CreateDeploymentScreen} />
-        <Stack.Screen name="ReplicaSets" component={ReplicaSetListScreen} />
+        <Stack.Screen name="ReplicaSetList" component={ReplicaSetListScreen} />
         <Stack.Screen name="ReplicaSet" component={ReplicaSetScreen} />
         <Stack.Screen name="Pods" component={PodListScreen} />
         <Stack.Screen name="Pod" component={PodScreen} />
-        <Stack.Screen name="CustomResourceDefinitions" component={CustomResourceDefinitionListScreen} />
+        <Stack.Screen name="CustomResourceDefinitionList" component={CustomResourceDefinitionListScreen} />
         <Stack.Screen name="CustomResourceDefinition" component={CustomResourceDefinitionScreen} />
-        <Stack.Screen name="APIGroups" component={APIGroupListScreen} />
+        <Stack.Screen name="APIGroupList" component={APIGroupListScreen} />
         <Stack.Screen name="APIGroup" component={APIGroupScreen} />
-        <Stack.Screen name="APIResources" component={APIResourceListScreen} />
-        <Stack.Screen name="APIServices" component={APIServiceListScreen} />
+        <Stack.Screen name="APIResourceList" component={APIResourceListScreen} />
+        <Stack.Screen name="APIServiceList" component={APIServiceListScreen} />
         <Stack.Screen name="APIService" component={APIServiceScreen} />
         <Stack.Screen name="ViewYaml" component={ViewYamlScreen} />
       </Stack.Navigator>

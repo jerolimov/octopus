@@ -4,12 +4,12 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { HeaderButtons, HeaderButton, Item, HiddenItem, OverflowMenu } from 'react-navigation-header-buttons';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 
-import { StackParamList } from './routes';
-import { Pod, Container, VolumeMount, ContainerStatus } from './types';
-import PodStatus from './PodStatus';
+import { StackParamList } from '../routes';
+import { Pod, Container, VolumeMount, ContainerStatus } from '../types';
+import PodStatus from '../components/PodStatus';
 import { DefaultTheme } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Container as ContainerView, Text } from './ThemeComponents';
+import { Container as ContainerView, Text } from '../components/ThemeComponents';
 
 type PodScreenProps = {
   route: { params: { pod: Pod } };

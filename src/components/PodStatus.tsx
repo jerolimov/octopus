@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import { Pod } from "./types";
-import { PodStatusPhaseColors } from "./colors";
+import { Pod } from "../types";
+import { PodStatusPhaseColors } from "../colors";
 
 export default function PodStatus({ pod }: { pod: Pod }) {
   const color = PodStatusPhaseColors[pod.status.phase] || PodStatusPhaseColors.Unknown;

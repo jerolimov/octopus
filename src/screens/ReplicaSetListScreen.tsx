@@ -3,13 +3,13 @@ import { ScrollView } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import { get } from './api';
-import { StackParamList } from './routes';
-import { ReplicaSetList, ReplicaSet } from './types';
-import { Container, Text } from './ThemeComponents';
+import { get } from '../api';
+import { StackParamList } from '../routes';
+import { ReplicaSetList, ReplicaSet } from '../types';
+import { Container, Text } from '../components/ThemeComponents';
 
 type ReplicaSetListScreenProps = {
-  navigation: StackNavigationProp<StackParamList, 'ReplicaSets'>,
+  navigation: StackNavigationProp<StackParamList, 'ReplicaSetList'>,
 }
 
 export default function ReplicaSetListScreen({ navigation }: ReplicaSetListScreenProps) {
@@ -32,7 +32,7 @@ export default function ReplicaSetListScreen({ navigation }: ReplicaSetListScree
 
 type ReplicaSetViewProps = {
   replicaSet: ReplicaSet;
-  navigation: StackNavigationProp<StackParamList, 'ReplicaSets'>;
+  navigation: StackNavigationProp<StackParamList, 'ReplicaSetList'>;
 }
 
 function ReplicaSetView({ replicaSet, navigation }: ReplicaSetViewProps) {

@@ -3,10 +3,10 @@ import { ScrollView, RefreshControl, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import { get } from './api';
-import { StackParamList } from './routes';
-import { APIGroup } from './types';
-import { Container, Text } from './ThemeComponents';
+import { get } from '../api';
+import { StackParamList } from '../routes';
+import { APIGroup } from '../types';
+import { Container, Text } from '../components/ThemeComponents';
 
 type APIGroupScreenProps = {
   route: { params: { path: string } };
@@ -43,7 +43,7 @@ export default function APIGroupScreen({ route, navigation }: APIGroupScreenProp
         ) : null}
         {apiGroup?.versions.map((version) => (
           <TouchableOpacity
-            onPress={() => navigation.push('APIResources', { path: path + '/' + version.groupVersion })}
+            onPress={() => navigation.push('APIResourceList', { path: path + '/' + version.groupVersion })}
             style={{ padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
           >
             <Text>

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { ScrollView, View } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import { get } from './api';
-import { StackParamList } from './routes';
-import { Namespace, PodList } from './types';
-import NamespaceStatus from './NamespaceStatus';
-import { Container, Text } from './ThemeComponents';
+import { get } from '../api';
+import { StackParamList } from '../routes';
+import { Namespace, PodList } from '../types';
+import NamespaceStatus from '../components/NamespaceStatus';
+import { Container, Text } from '../components/ThemeComponents';
 
 type NamespaceScreenProps = {
   route: { params: { namespace: Namespace } };

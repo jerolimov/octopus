@@ -3,13 +3,13 @@ import { ScrollView, RefreshControl } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import { get } from './api';
-import { StackParamList } from './routes';
-import { CustomResourceDefinitionList, CustomResourceDefinition } from './types';
-import { Container, Text } from './ThemeComponents';
+import { get } from '../api';
+import { StackParamList } from '../routes';
+import { CustomResourceDefinitionList, CustomResourceDefinition } from '../types';
+import { Container, Text } from '../components/ThemeComponents';
 
 type CustomResourceDefinitionListScreenProps = {
-  navigation: StackNavigationProp<StackParamList, 'CustomResourceDefinitions'>,
+  navigation: StackNavigationProp<StackParamList, 'CustomResourceDefinitionList'>,
 }
 
 export default function CustomResourceDefinitionListScreen({ navigation }: CustomResourceDefinitionListScreenProps) {
@@ -41,7 +41,7 @@ export default function CustomResourceDefinitionListScreen({ navigation }: Custo
 
 type CustomResourceDefinitionViewProps = {
   customResourceDefinition: CustomResourceDefinition;
-  navigation: StackNavigationProp<StackParamList, 'CustomResourceDefinitions'>;
+  navigation: StackNavigationProp<StackParamList, 'CustomResourceDefinitionList'>;
 }
 
 function CustomResourceDefinitionView({ customResourceDefinition, navigation }: CustomResourceDefinitionViewProps) {

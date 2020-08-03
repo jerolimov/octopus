@@ -5,10 +5,10 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { HeaderButtons, HeaderButton, Item, HiddenItem, OverflowMenu } from 'react-navigation-header-buttons';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 
-import { get, deleteIt } from './api';
-import { StackParamList } from './routes';
-import { Deployment, PodList } from './types';
-import { Container, Text } from './ThemeComponents';
+import { get, deleteIt } from '../api';
+import { StackParamList } from '../routes';
+import { Deployment, PodList } from '../types';
+import { Container, Text } from '../components/ThemeComponents';
 
 type DeploymentScreenProps = {
   route: { params: { deployment: Deployment } };

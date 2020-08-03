@@ -3,11 +3,11 @@ import { ScrollView } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import { get } from './api';
-import { StackParamList } from './routes';
-import { PodList, Pod } from './types';
-import PodStatus from './PodStatus';
-import { Container, Text } from './ThemeComponents';
+import { get } from '../api';
+import { StackParamList } from '../routes';
+import { PodList, Pod } from '../types';
+import PodStatus from '../components/PodStatus';
+import { Container, Text } from '../components/ThemeComponents';
 
 type PodListScreenProps = {
   navigation: StackNavigationProp<StackParamList, 'Pods'>,

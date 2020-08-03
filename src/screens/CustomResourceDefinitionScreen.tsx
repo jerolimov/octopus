@@ -2,13 +2,13 @@ import React from 'react';
 import { ScrollView, View } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import { StackParamList } from './routes';
-import { CustomResourceDefinition } from './types';
-import { Container, Text } from './ThemeComponents';
+import { StackParamList } from '../routes';
+import { CustomResourceDefinition } from '../types';
+import { Container, Text } from '../components/ThemeComponents';
 
 type CustomResourceDefinitionScreenProps = {
   route: { params: { customResourceDefinition: CustomResourceDefinition } };
-  navigation: StackNavigationProp<StackParamList, 'CustomResourceDefinitions'>,
+  navigation: StackNavigationProp<StackParamList, 'CustomResourceDefinitionList'>,
 }
 
 export default function CustomResourceDefinitionScreen({ route, navigation }: CustomResourceDefinitionScreenProps) {

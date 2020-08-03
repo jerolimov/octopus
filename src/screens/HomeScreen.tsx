@@ -6,10 +6,10 @@ import { DefaultTheme } from '@react-navigation/native';
 import { HeaderButtons, HeaderButton, Item, HiddenItem, OverflowMenu } from 'react-navigation-header-buttons';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 
-import { watch, get } from './api';
-import { StackParamList } from './routes';
-import { Pod, Version } from './types';
-import { Container, Text } from './ThemeComponents';
+import { watch, get } from '../api';
+import { StackParamList } from '../routes';
+import { Pod, Version } from '../types';
+import { Container, Text } from '../components/ThemeComponents';
 
 type HomeScreenProps = {
   navigation: StackNavigationProp<StackParamList, 'Home'>,
@@ -37,19 +37,19 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
     <ScrollView>
       <Container>
         <TouchableOpacity
-          onPress={() => navigation.navigate('Namespaces')}
+          onPress={() => navigation.navigate('NamespaceList')}
           style={{ padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
         >
           <Text>Namespaces</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate('Deployments')}
+          onPress={() => navigation.navigate('DeploymentList')}
           style={{ padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
         >
           <Text>Deployments</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate('ReplicaSets')}
+          onPress={() => navigation.navigate('ReplicaSetList')}
           style={{ padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
         >
           <Text>ReplicaSets</Text>
@@ -61,13 +61,13 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
           <Text>Pods</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate('CustomResourceDefinitions')}
+          onPress={() => navigation.navigate('CustomResourceDefinitionList')}
           style={{ padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
         >
           <Text>CustomResourceDefinitions</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate('APIGroups', { path: 'apis' })}
+          onPress={() => navigation.navigate('APIGroupList', { path: 'apis' })}
           style={{ padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
         >
           <Text>APIs</Text>

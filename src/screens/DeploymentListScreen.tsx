@@ -5,14 +5,14 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { HeaderButtons, HeaderButton, Item, HiddenItem, OverflowMenu } from 'react-navigation-header-buttons';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 
-import { get } from './api';
-import { StackParamList } from './routes';
-import { DeploymentList, Deployment } from './types';
+import { get } from '../api';
+import { StackParamList } from '../routes';
+import { DeploymentList, Deployment } from '../types';
 import { DefaultTheme } from '@react-navigation/native';
-import { Container, Text } from './ThemeComponents';
+import { Container, Text } from '../components/ThemeComponents';
 
 type DeploymentListScreenProps = {
-  navigation: StackNavigationProp<StackParamList, 'Deployments'>,
+  navigation: StackNavigationProp<StackParamList, 'DeploymentList'>,
 }
 
 export default function DeploymentListScreen({ navigation }: DeploymentListScreenProps) {
@@ -50,7 +50,7 @@ export default function DeploymentListScreen({ navigation }: DeploymentListScree
 
 type DeploymentViewProps = {
   deployment: Deployment;
-  navigation: StackNavigationProp<StackParamList, 'Deployments'>;
+  navigation: StackNavigationProp<StackParamList, 'DeploymentList'>;
 }
 
 function DeploymentView({ deployment, navigation }: DeploymentViewProps) {
