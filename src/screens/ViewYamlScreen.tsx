@@ -1,9 +1,10 @@
 import React from 'react';
-import { ScrollView, Text, Platform } from 'react-native';
+import { ScrollView, Platform } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import YAML from 'yaml';
 
 import { StackParamList } from '../routes';
+import { Container, Text } from '../components/ThemeComponents';
 
 type DeploymentScreenProps = {
   route: { params: { yaml: any } };
@@ -15,8 +16,10 @@ export default function ViewYamlScreen({ route }: DeploymentScreenProps) {
   const fontFamily = Platform.OS === 'ios' ? 'Menlo-Regular' : 'Courier';
 
   return (
-    <ScrollView style={{ backgroundColor: 'white' }}>
-      <Text style={{ fontFamily, padding: 10 }}>{yaml}</Text>
+    <ScrollView>
+      <Container>
+        <Text style={{ fontFamily, padding: 10 }}>{yaml}</Text>
+      </Container>
     </ScrollView>
   );
 }
