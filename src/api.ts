@@ -1,6 +1,9 @@
 import { BASE_URL } from "./config"
 
-export function get<T>(path: string): Promise<T> {
+export function get<T>(path?: string): Promise<T> {
+  if (!path) {
+    throw new Error('Missing path');
+  }
   return fetch(BASE_URL + path).then((response) => {
     if (response.status !== 200) {
     console.warn('get ' + BASE_URL + path + ' has an unexpected status code ' + response.status);

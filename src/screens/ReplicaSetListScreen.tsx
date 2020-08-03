@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { ScrollView } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { V1ReplicaSet as ReplicaSet } from '@kubernetes/client-node/dist/gen/model/v1ReplicaSet';
+import { V1ReplicaSetList as ReplicaSetList } from '@kubernetes/client-node/dist/gen/model/v1ReplicaSetList';
 
 import { get } from '../api';
 import { StackParamList } from '../routes';
-import { ReplicaSetList, ReplicaSet } from '../types';
 import { Container, Text } from '../components/ThemeComponents';
 
 type ReplicaSetListScreenProps = {
@@ -41,7 +42,7 @@ function ReplicaSetView({ replicaSet, navigation }: ReplicaSetViewProps) {
       onPress={() => navigation.push('ReplicaSet', { replicaSet })}
       style={{ padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
     >
-      <Text style={{ paddingLeft: 8 }}>{replicaSet.metadata.name}</Text>
+      <Text style={{ paddingLeft: 8 }}>{replicaSet.metadata?.name}</Text>
     </TouchableOpacity>
   );
 }

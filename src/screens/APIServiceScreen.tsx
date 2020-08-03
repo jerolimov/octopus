@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, RefreshControl, View } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { V1APIService as APIService } from '@kubernetes/client-node/dist/gen/model/v1APIService';
 
 import { get } from '../api';
 import { StackParamList } from '../routes';
-import { APIService } from '../types';
 import { Container, Text } from '../components/ThemeComponents';
 
 type APIServiceScreenProps = {
@@ -37,10 +37,10 @@ export default function APIServiceScreen({ route, navigation }: APIServiceScreen
         {error ? <Text>{JSON.stringify(error, null, 2)}</Text> : null}
         {apiService ? (
           <View style={{ padding: 15 }}>
-            <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>{apiService.metadata.name}</Text>
-            <Text>UID: {apiService.metadata.uid}</Text>
-            <Text>Resource version: {apiService.metadata.resourceVersion}</Text>
-            <Text>Creation timestamp: {apiService.metadata.creationTimestamp}</Text>
+            <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>{apiService.metadata?.name}</Text>
+            <Text>UID: {apiService.metadata?.uid}</Text>
+            <Text>Resource version: {apiService.metadata?.resourceVersion}</Text>
+            <Text>Creation timestamp: {apiService.metadata?.creationTimestamp}</Text>
           </View>
         ) : null}
 

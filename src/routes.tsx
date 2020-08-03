@@ -1,4 +1,8 @@
-import { Pod, Namespace, Deployment, ReplicaSet, CustomResourceDefinition } from "./types";
+import { V1Pod as Pod } from '@kubernetes/client-node/dist/gen/model/v1Pod';
+import { V1Namespace as Namespace } from '@kubernetes/client-node/dist/gen/model/v1Namespace';
+import { V1Deployment as Deployment } from '@kubernetes/client-node/dist/gen/model/v1Deployment';
+import { V1ReplicaSet as ReplicaSet } from '@kubernetes/client-node/dist/gen/model/v1ReplicaSet';
+import { V1CustomResourceDefinition as CustomResourceDefinition } from '@kubernetes/client-node/dist/gen/model/v1CustomResourceDefinition';
 
 export type StackParamList = {
   Home: any,

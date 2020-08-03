@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { ScrollView, RefreshControl } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { V1APIGroupList as APIGroupList } from '@kubernetes/client-node/dist/gen/model/v1APIGroupList';
+import { V1APIGroup as APIGroup } from '@kubernetes/client-node/dist/gen/model/v1APIGroup';
 
 import { get } from '../api';
 import { StackParamList } from '../routes';
-import { APIGroupList, APIGroup } from '../types';
 import { Container, Text } from '../components/ThemeComponents';
 
 type APIGroupListScreenProps = {
@@ -60,12 +61,12 @@ function APIGroupView({ prefixPath, apiGroup, navigation }: APIGroupViewProps) {
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => navigation.push('APIResourceList', { path: prefixPath + '/' + apiGroup.preferredVersion.groupVersion })}
+        onPress={() => navigation.push('APIResourceList', { path: prefixPath + '/' + apiGroup.preferredVersion?.groupVersion })}
         style={{ padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
       >
         <Text>
           <Text style={{ fontWeight: 'bold' }}>{apiGroup.name}</Text>
-          <Text>{' / ' + apiGroup.preferredVersion.version}</Text>
+          <Text>{' / ' + apiGroup.preferredVersion?.version}</Text>
         </Text>
       </TouchableOpacity>
     </>

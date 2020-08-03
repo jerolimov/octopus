@@ -4,10 +4,11 @@ import { DefaultTheme } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { HeaderButtons, HeaderButton, Item, HiddenItem, OverflowMenu } from 'react-navigation-header-buttons';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { V1Deployment as Deployment } from '@kubernetes/client-node/dist/gen/model/v1Deployment';
+import { V1PodList as PodList } from '@kubernetes/client-node/dist/gen/model/v1PodList';
 
 import { get, deleteIt } from '../api';
 import { StackParamList } from '../routes';
-import { Deployment, PodList } from '../types';
 import { Container, Text } from '../components/ThemeComponents';
 
 type DeploymentScreenProps = {
@@ -22,7 +23,7 @@ export default function DeploymentScreen({ route, navigation }: DeploymentScreen
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      title: deployment.metadata.name,
+      title: deployment.metadata?.name,
       headerBackTitleVisible: false,
       headerRight: () => <DeploymentScreenHeaderRight {...{route, navigation}} />,
     });
@@ -37,7 +38,7 @@ export default function DeploymentScreen({ route, navigation }: DeploymentScreen
     const query = '?labelSelector=' + encodeURIComponent(labelSelector);
 
     Promise.all([
-      get<Deployment>(deployment.metadata.selfLink).then(setDeployment, setError),
+      get<Deployment>(deployment.metadata?.selfLink).then(setDeployment, setError),
       get<PodList>('api/v1/namespaces/default/pods' + query).then(setPods, setError),
     ]).finally(() => setRefreshing(false));
   };
@@ -53,23 +54,23 @@ export default function DeploymentScreen({ route, navigation }: DeploymentScreen
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Labels</Text>
         <View style={{ padding: 15 }}>
-          {Object.keys(deployment.metadata.labels || {}).map((labelName, index) => (
-            <Text key={index}>{labelName}={deployment.metadata.labels?.[labelName]}</Text>
+          {Object.keys(deployment.metadata?.labels || {}).map((labelName, index) => (
+            <Text key={index}>{labelName}={deployment.metadata?.labels?.[labelName]}</Text>
           ))}
         </View>
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Annotations</Text>
         <View style={{ padding: 15 }}>
-          {Object.keys(deployment.metadata.annotations || {}).map((annotationName, index) => (
-            <Text key={index}>{annotationName}={deployment.metadata.annotations?.[annotationName]}</Text>
+          {Object.keys(deployment.metadata?.annotations || {}).map((annotationName, index) => (
+            <Text key={index}>{annotationName}={deployment.metadata?.annotations?.[annotationName]}</Text>
           ))}
         </View>
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Pods</Text>
         <View style={{ padding: 15 }}>
           {pods?.items ? pods.items.map((pod) => (
-            <View key={pod.metadata.uid}>
-              <Text>{pod.metadata.name}</Text>
+            <View key={pod.metadata?.uid}>
+              <Text>{pod.metadata?.name}</Text>
             </View>
           )) : null}
         </View>
@@ -85,11 +86,13 @@ function DeploymentScreenHeaderRight({ route, navigation }: DeploymentScreenProp
   const deployment = route.params.deployment;
 
   const onDeletePressed = () => {
-    deleteIt(deployment.metadata.selfLink).then((response) => {
-      console.warn('Delete successful!', response);
-    }, (error) => {
-      console.warn('Delete failed!', error);
-    });
+    if (deployment.metadata?.selfLink) {
+      deleteIt(deployment.metadata?.selfLink).then((response) => {
+        console.warn('Delete successful!', response);
+      }, (error) => {
+        console.warn('Delete failed!', error);
+      });
+    }
   };
 
   return (

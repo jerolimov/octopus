@@ -4,10 +4,11 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { HeaderButtons, HeaderButton, Item, HiddenItem, OverflowMenu } from 'react-navigation-header-buttons';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { V1DeploymentList as DeploymentList } from '@kubernetes/client-node/dist/gen/model/v1DeploymentList';
+import { V1Deployment as Deployment } from '@kubernetes/client-node/dist/gen/model/v1Deployment';
 
 import { get } from '../api';
 import { StackParamList } from '../routes';
-import { DeploymentList, Deployment } from '../types';
 import { DefaultTheme } from '@react-navigation/native';
 import { Container, Text } from '../components/ThemeComponents';
 
@@ -54,15 +55,15 @@ type DeploymentViewProps = {
 }
 
 function DeploymentView({ deployment, navigation }: DeploymentViewProps) {
-  const x = deployment.status.readyReplicas;
-  const y = deployment.status.replicas;
+  const x = deployment.status?.readyReplicas;
+  const y = deployment.status?.replicas;
   return (
     <TouchableOpacity
       onPress={() => navigation.push('Deployment', { deployment })}
       style={{ padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
     >
       <Text style={{ minWidth: 80 }}>{x} / {y} ready</Text>
-      <Text style={{ paddingLeft: 8 }}>{deployment.metadata.name}</Text>
+      <Text style={{ paddingLeft: 8 }}>{deployment.metadata?.name}</Text>
     </TouchableOpacity>
   );
 }

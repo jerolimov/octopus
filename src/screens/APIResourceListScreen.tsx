@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { ScrollView, RefreshControl } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { V1APIResourceList as APIResourceList } from '@kubernetes/client-node/dist/gen/model/v1APIResourceList';
+import { V1APIResource as APIResource } from '@kubernetes/client-node/dist/gen/model/v1APIResource';
 
 import { get } from '../api';
 import { StackParamList } from '../routes';
-import { APIResourceList, APIResource } from '../types';
 import { Container, Text } from '../components/ThemeComponents';
 
 type APIResourceListScreenProps = {

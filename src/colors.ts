@@ -1,7 +1,5 @@
-import { PodStatusPhase, NamespaceStatusPhase } from "./types";
-
 // https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/
-export const PodStatusPhaseColors: Record<PodStatusPhase, string> = {
+export const PodStatusPhaseColors: Record<string, string> = {
   Pending: 'lightgreen',
   Running: 'green',
   Succeeded: 'orange',
@@ -9,7 +7,7 @@ export const PodStatusPhaseColors: Record<PodStatusPhase, string> = {
   Unknown: 'grey',
 }
 
-export const NamespaceStatusPhaseColors: Record<NamespaceStatusPhase, string> = {
+export const NamespaceStatusPhaseColors: Record<string, string> = {
   Active: 'green',
   Unknown: 'grey',
 }

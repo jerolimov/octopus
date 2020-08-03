@@ -1,9 +1,9 @@
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { V1CustomResourceDefinition as CustomResourceDefinition } from '@kubernetes/client-node/dist/gen/model/v1CustomResourceDefinition';
 
 import { StackParamList } from '../routes';
-import { CustomResourceDefinition } from '../types';
 import { Container, Text } from '../components/ThemeComponents';
 
 type CustomResourceDefinitionScreenProps = {
@@ -32,7 +32,7 @@ export default function CustomResourceDefinitionScreen({ route, navigation }: Cu
         <Text>{customResourceDefinition.spec.group}</Text>
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Full name:</Text>
-        <Text>{customResourceDefinition.metadata.name}</Text>
+        <Text>{customResourceDefinition.metadata?.name}</Text>
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Scope:</Text>
         <Text>{customResourceDefinition.spec.scope}</Text>
@@ -43,20 +43,20 @@ export default function CustomResourceDefinitionScreen({ route, navigation }: Cu
           <Text>plural: {customResourceDefinition.spec.names.plural}</Text>
           <Text>Kind: {customResourceDefinition.spec.names.kind}</Text>
           <Text>List kind: {customResourceDefinition.spec.names.listKind}</Text>
-          <Text>Categories: {customResourceDefinition.spec.names.categories.join(', ')}</Text>
+          <Text>Categories: {customResourceDefinition.spec.names.categories?.join(', ')}</Text>
         </View>
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Labels</Text>
         <View style={{ padding: 15 }}>
-          {Object.keys(customResourceDefinition.metadata.labels || {}).map((labelName) => (
-            <Text>{labelName}={customResourceDefinition.metadata.labels?.[labelName]}</Text>
+          {Object.keys(customResourceDefinition.metadata?.labels || {}).map((labelName) => (
+            <Text>{labelName}={customResourceDefinition.metadata?.labels?.[labelName]}</Text>
           ))}
         </View>
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Annotations</Text>
         <View style={{ padding: 15 }}>
-          {Object.keys(customResourceDefinition.metadata.annotations || {}).map((annotationName) => (
-            <Text>{annotationName}={customResourceDefinition.metadata.annotations?.[annotationName]}</Text>
+          {Object.keys(customResourceDefinition.metadata?.annotations || {}).map((annotationName) => (
+            <Text>{annotationName}={customResourceDefinition.metadata?.annotations?.[annotationName]}</Text>
           ))}
         </View>
 

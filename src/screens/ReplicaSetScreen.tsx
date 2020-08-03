@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, View } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { V1PodList as PodList } from '@kubernetes/client-node/dist/gen/model/v1PodList';
+import { V1ReplicaSet as ReplicaSet } from '@kubernetes/client-node/dist/gen/model/v1ReplicaSet';
 
 import { StackParamList } from '../routes';
-import { ReplicaSet, PodList } from '../types';
 import { get } from '../api';
 import { Container, Text } from '../components/ThemeComponents';
 
@@ -17,7 +18,7 @@ export default function ReplicaSetScreen({ route, navigation }: ReplicaSetScreen
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      title: replicaSet.metadata.name,
+      title: replicaSet.metadata?.name,
       headerBackTitleVisible: false,
     });
   }, [navigation]);
@@ -40,29 +41,29 @@ export default function ReplicaSetScreen({ route, navigation }: ReplicaSetScreen
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Labels</Text>
         <View style={{ padding: 15 }}>
-          {Object.keys(replicaSet.metadata.labels || {}).map((labelName, index) => (
-            <Text key={index}>{labelName}={replicaSet.metadata.labels?.[labelName]}</Text>
+          {Object.keys(replicaSet.metadata?.labels || {}).map((labelName, index) => (
+            <Text key={index}>{labelName}={replicaSet.metadata?.labels?.[labelName]}</Text>
           ))}
         </View>
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Annotations</Text>
         <View style={{ padding: 15 }}>
-          {Object.keys(replicaSet.metadata.annotations || {}).map((annotationName, index) => (
-            <Text key={index}>{annotationName}={replicaSet.metadata.annotations?.[annotationName]}</Text>
+          {Object.keys(replicaSet.metadata?.annotations || {}).map((annotationName, index) => (
+            <Text key={index}>{annotationName}={replicaSet.metadata?.annotations?.[annotationName]}</Text>
           ))}
         </View>
 
         <View>
           <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Status</Text>
-          <Text>Ready replicas: {replicaSet.status.readyReplicas}</Text>
-          <Text>Replicas: {replicaSet.status.replicas}</Text>
+          <Text>Ready replicas: {replicaSet.status?.readyReplicas}</Text>
+          <Text>Replicas: {replicaSet.status?.replicas}</Text>
         </View>
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Pods</Text>
         <View style={{ padding: 15 }}>
           {pods?.items ? pods.items.map((pod) => (
-            <View key={pod.metadata.uid}>
-              <Text>{pod.metadata.name}</Text>
+            <View key={pod.metadata?.uid}>
+              <Text>{pod.metadata?.name}</Text>
             </View>
           )) : null}
         </View>

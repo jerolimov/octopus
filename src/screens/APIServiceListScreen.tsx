@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { ScrollView, RefreshControl } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { V1APIServiceList as APIServiceList } from '@kubernetes/client-node/dist/gen/model/v1APIServiceList';
+import { V1APIService as APIService } from '@kubernetes/client-node/dist/gen/model/v1APIService';
 
 import { get } from '../api';
 import { StackParamList } from '../routes';
-import { APIServiceList, APIService } from '../types';
 import { Container, Text } from '../components/ThemeComponents';
 
 type APIServiceListScreenProps = {
@@ -51,11 +52,11 @@ type APIServiceViewProps = {
 function APIServiceView({ prefixPath, apiService, navigation }: APIServiceViewProps) {
   return (
     <TouchableOpacity
-      onPress={() => navigation.push('APIService', { path: apiService.metadata.selfLink })}
+      onPress={() => navigation.push('APIService', { path: apiService.metadata?.selfLink })}
       style={{ padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
     >
       <Text>
-        <Text style={{ fontWeight: 'bold' }}>{apiService.metadata.name}</Text>
+        <Text style={{ fontWeight: 'bold' }}>{apiService.metadata?.name}</Text>
       </Text>
     </TouchableOpacity>
   );

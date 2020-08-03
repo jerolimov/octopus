@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { ScrollView, TextInput, Button } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { V1Deployment as Deployment } from '@kubernetes/client-node/dist/gen/model/v1Deployment';
 
 import { StackParamList } from '../routes';
 import { post } from '../api';
-import { Deployment } from '../types';
 import { Container, Text } from '../components/ThemeComponents';
 
 type CreateDeploymentScreenProps = {

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { ScrollView, RefreshControl, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { V1APIGroup as APIGroup } from '@kubernetes/client-node/dist/gen/model/v1APIGroup';
 
 import { get } from '../api';
 import { StackParamList } from '../routes';
-import { APIGroup } from '../types';
 import { Container, Text } from '../components/ThemeComponents';
 
 type APIGroupScreenProps = {
@@ -41,8 +41,9 @@ export default function APIGroupScreen({ route, navigation }: APIGroupScreenProp
             <Text>{apiGroup.name}</Text>
           </View>
         ) : null}
-        {apiGroup?.versions.map((version) => (
+        {apiGroup?.versions.map((version, index) => (
           <TouchableOpacity
+            key={index}
             onPress={() => navigation.push('APIResourceList', { path: path + '/' + version.groupVersion })}
             style={{ padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
           >

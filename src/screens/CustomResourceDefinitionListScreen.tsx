@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { ScrollView, RefreshControl } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { V1CustomResourceDefinitionList as CustomResourceDefinitionList } from '@kubernetes/client-node/dist/gen/model/v1CustomResourceDefinitionList';
+import { V1CustomResourceDefinition as CustomResourceDefinition } from '@kubernetes/client-node/dist/gen/model/v1CustomResourceDefinition';
 
 import { get } from '../api';
 import { StackParamList } from '../routes';
-import { CustomResourceDefinitionList, CustomResourceDefinition } from '../types';
 import { Container, Text } from '../components/ThemeComponents';
 
 type CustomResourceDefinitionListScreenProps = {
@@ -52,7 +53,7 @@ function CustomResourceDefinitionView({ customResourceDefinition, navigation }: 
     >
       <Text style={{ fontWeight: 'bold' }}>{customResourceDefinition.spec.names.kind}</Text>
       <Text>Group: {customResourceDefinition.spec.group}</Text>
-      <Text>Full name: {customResourceDefinition.metadata.name}</Text>
+      <Text>Full name: {customResourceDefinition.metadata?.name}</Text>
       <Text>Scope: {customResourceDefinition.spec.scope}</Text>
     </TouchableOpacity>
   );

@@ -3,9 +3,12 @@ import { ScrollView, View } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { HeaderButtons, HeaderButton, Item, HiddenItem, OverflowMenu } from 'react-navigation-header-buttons';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { V1Pod as Pod } from '@kubernetes/client-node/dist/gen/model/v1Pod';
+import { V1Container as Container } from '@kubernetes/client-node/dist/gen/model/v1Container';
+import { V1VolumeMount as VolumeMount } from '@kubernetes/client-node/dist/gen/model/v1VolumeMount';
+import { V1ContainerStatus as ContainerStatus } from '@kubernetes/client-node/dist/gen/model/v1ContainerStatus';
 
 import { StackParamList } from '../routes';
-import { Pod, Container, VolumeMount, ContainerStatus } from '../types';
 import PodStatus from '../components/PodStatus';
 import { DefaultTheme } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -26,20 +29,20 @@ export default function PodScreen({ route, navigation }: PodScreenProps) {
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      title: pod.metadata.name,
+      title: pod.metadata?.name,
       headerBackTitleVisible: false,
       headerRight: () => <PodScreenHeaderRight {...{route, navigation}} />,
     });
   }, [navigation]);
 
   const mappedContainers: Record<string, MappedContainer> = {};
-  pod.spec.containers.forEach((container) => {
+  pod.spec?.containers.forEach((container) => {
     mappedContainers[container.name] = {
       ...mappedContainers[container.name],
       container,
     };
   });
-  pod.status.containerStatuses.forEach((containerStatus) => {
+  pod.status?.containerStatuses?.forEach((containerStatus) => {
     mappedContainers[containerStatus.name] = {
       ...mappedContainers[containerStatus.name],
       containerStatus,
@@ -51,22 +54,22 @@ export default function PodScreen({ route, navigation }: PodScreenProps) {
       <ContainerView style={{ padding: 15 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', paddingBottom: 15 }}>
           <PodStatus pod={pod} />
-          <Text style={{ paddingLeft: 8 }}>{pod.status.phase}</Text>
+          <Text style={{ paddingLeft: 8 }}>{pod.status?.phase}</Text>
         </View>
 
-        <Text>Namespace: {pod.metadata.namespace}</Text>
-        <Text>UID: {pod.metadata.uid}</Text>
+        <Text>Namespace: {pod.metadata?.namespace}</Text>
+        <Text>UID: {pod.metadata?.uid}</Text>
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Labels</Text>
         <View style={{ padding: 15 }}>
-          {Object.keys(pod.metadata.labels || {}).map((labelName) => (
-            <Text key={labelName}>{labelName}: {pod.metadata.labels?.[labelName]}</Text>
+          {Object.keys(pod.metadata?.labels || {}).map((labelName) => (
+            <Text key={labelName}>{labelName}: {pod.metadata?.labels?.[labelName]}</Text>
           ))}
         </View>
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Conditions</Text>
         <View style={{ padding: 15 }}>
-          {pod.status.conditions.map((condition, index) => (
+          {pod.status?.conditions?.map((condition, index) => (
             <View key={index} style={{ paddingBottom: 15 }}>
               <Text>Type: {condition.type}</Text>
               <Text>Status: {condition.status}</Text>
@@ -79,17 +82,17 @@ export default function PodScreen({ route, navigation }: PodScreenProps) {
         </View>
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Host and IPs</Text>
-        <TouchableOpacity onPress={() => alert('TODO open node ' + pod.spec.nodeName)}>
-          <Text>Node: <Text style={{ color: 'blue', textDecorationLine: 'underline' }}>{pod.spec.nodeName}</Text></Text>
+        <TouchableOpacity onPress={() => alert('TODO open node ' + pod.spec?.nodeName)}>
+          <Text>Node: <Text style={{ color: 'blue', textDecorationLine: 'underline' }}>{pod.spec?.nodeName}</Text></Text>
         </TouchableOpacity>
-        <Text>Host IP: {pod.status.hostIP}</Text>
-        <Text>Pod IP: {pod.status.podIP}</Text>
-        <Text>QoS class: {pod.status.qosClass}</Text>
+        <Text>Host IP: {pod.status?.hostIP}</Text>
+        <Text>Pod IP: {pod.status?.podIP}</Text>
+        <Text>QoS class: {pod.status?.qosClass}</Text>
 
         <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>Containers</Text>
         {Object.values(mappedContainers).map((mappedContainer, key) => <ContainerItem {...{key}} {...mappedContainer} />)}
 
-        {pod.metadata.ownerReferences && pod.metadata.ownerReferences.length > 0 ? (
+        {pod.metadata?.ownerReferences && pod.metadata?.ownerReferences.length > 0 ? (
           <View>
             <Text style={{ fontWeight: 'bold', paddingTop: 20 }}>
               {pod.metadata.ownerReferences.length === 1 ? 'Owner' : 'Owners'}
@@ -137,7 +140,7 @@ function ContainerItem({ container, containerStatus }: MappedContainer) {
       <Text>Name: {container?.name}</Text>
       <Text>Image: {container?.image}</Text>
       <Text style={{ paddingTop: 10 }}>Volume mounts:</Text>
-      {container?.volumeMounts.map((volumeMount, key) => <VolumeMountItem {...{key, volumeMount}} />)}
+      {container?.volumeMounts?.map((volumeMount, key) => <VolumeMountItem {...{key, volumeMount}} />)}
     </View>
   );
 }

@@ -5,10 +5,10 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { DefaultTheme } from '@react-navigation/native';
 import { HeaderButtons, HeaderButton, Item, HiddenItem, OverflowMenu } from 'react-navigation-header-buttons';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { VersionInfo } from '@kubernetes/client-node/dist/gen/model/versionInfo';
 
 import { watch, get } from '../api';
 import { StackParamList } from '../routes';
-import { Pod, Version } from '../types';
 import { Container, Text } from '../components/ThemeComponents';
 
 type HomeScreenProps = {
@@ -22,15 +22,17 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
     });
   }, [navigation]);
 
+  /*
   useEffect(() => {
     return watch<Pod>('api/v1/namespaces/default/pods?watch=true', (type, pod) => {
       console.warn('onMessage', type, pod.status.phase, pod.metadata.name);
     });
   }, []);
+  */
 
-  const [version, setVersion] = useState<Version>();
+  const [versionInfo, setVersionInfo] = useState<VersionInfo>();
   useEffect(() => {
-    get<Version>('version').then(setVersion, () => {});
+    get<VersionInfo>('version').then(setVersionInfo, () => {});
   })
 
   return (
@@ -73,9 +75,9 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
           <Text>APIs</Text>
         </TouchableOpacity>
 
-        {version ? (
+        {versionInfo ? (
           <View style={{ padding: 15 }}>
-            <Text>Version: {version.major}.{version.minor} ({version.gitVersion})</Text>
+            <Text>Version: {versionInfo.major}.{versionInfo.minor} ({versionInfo.gitVersion})</Text>
           </View>
         ) : null}
       </Container>

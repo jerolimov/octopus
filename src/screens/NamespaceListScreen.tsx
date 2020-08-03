@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { ScrollView, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { V1Namespace as Namespace } from '@kubernetes/client-node/dist/gen/model/v1Namespace';
+import { V1NamespaceList as NamespaceList } from '@kubernetes/client-node/dist/gen/model/v1NamespaceList';
 
 import { get } from '../api';
 import { StackParamList } from '../routes';
-import { NamespaceList, Namespace } from '../types';
 import NamespaceStatus from '../components/NamespaceStatus';
 import { filterSystemNamespace } from '../utils';
 import { Container, Text, Switch } from '../components/ThemeComponents';
@@ -54,7 +55,7 @@ function NamespaceView({ namespace, navigation }: NamespaceViewProps) {
       style={{ padding: 15, borderBottomColor: 'lightgray', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center' }}
     >
       <NamespaceStatus namespace={namespace} />
-      <Text style={{ paddingLeft: 8 }}>{namespace.metadata.name}</Text>
+      <Text style={{ paddingLeft: 8 }}>{namespace.metadata?.name}</Text>
     </TouchableOpacity>
   );
 }
